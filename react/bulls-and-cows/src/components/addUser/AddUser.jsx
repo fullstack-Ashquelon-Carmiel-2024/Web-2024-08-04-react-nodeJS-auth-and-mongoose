@@ -138,7 +138,7 @@ export default function AddUser({children, add}) {
                     <option value="">-- Choose gender --</option>
                     <option value="f">Female</option>
                     <option value="m">Male</option>
-                    <option value="">Not telling ya</option>
+                    <option value="?">Not telling ya</option>
                   </select>
               </div>
             </div>

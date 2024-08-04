@@ -9,7 +9,9 @@ userSchema = new mongoose.Schema({
     role: { type: mongoose.Schema.Types.ObjectId, ref: 'Role', 
             required: true },
     sport: { type: mongoose.Schema.Types.ObjectId, ref: 'Sport', 
-            required: false }
+            required: false },
+    refreshToken: { type: String } // could be array if we want to enable
+                                  // concurrent login from different devices
 })
 
 const User = mongoose.model('User', userSchema)

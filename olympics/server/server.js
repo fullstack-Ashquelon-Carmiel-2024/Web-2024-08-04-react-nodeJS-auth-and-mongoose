@@ -2,7 +2,8 @@ const express = require('express');
 require('dotenv').config();
 require('./db/db');
 
-const { sportRouter, userRouter } = require('./routes/index');
+const { authRouter, sportRouter, userRouter } 
+                           = require('./routes/index');
 
 require('./model/index');
 
@@ -17,6 +18,7 @@ app.use(express.urlencoded({extended: true}))
 
 /******** ROUTES **********/
 
+app.use('/api/auth',authRouter);
 app.use('/api/sports',sportRouter);
 app.use('/api/users',userRouter);
 
