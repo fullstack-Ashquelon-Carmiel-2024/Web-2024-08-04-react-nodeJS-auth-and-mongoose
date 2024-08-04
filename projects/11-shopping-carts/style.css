@@ -1,0 +1,52 @@
+:root {
+    --main-bg-color: #e3f2fd;
+}
+
+body {
+    font-family: "Roboto", sans-serif!important;
+    font-weight: 400!important;
+    font-style: normal!important;
+}
+
+h1 {
+  font-family: "Roboto Mono", monospace!important;
+  font-optical-sizing: auto!important;
+  font-weight: 100!important;
+  font-style: normal!important;
+}
+
+h2 {
+  font-family: "El Messiri", sans-serif!important;
+  font-optical-sizing: auto!important;
+  font-weight: 400!important;
+  font-style: normal!important;
+}
+
+.bg-main {
+    background-color: var(--main-bg-color)!important;
+}
+
+.text-main {
+    color: var(--main-bg-color)!important;
+}
+
+.stock i, form i {
+    font-size: 4rem;
+}
+
+form i {
+    color: var(--bs-info-text-emphasis);
+}
+
+.choose {
+    cursor: pointer;
+}
+
+.chosen {
+    border: 2px dashed var(--bs-info-text-emphasis);
+    
+}
+
+.minify {
+    transform: scale(0.5);
+}

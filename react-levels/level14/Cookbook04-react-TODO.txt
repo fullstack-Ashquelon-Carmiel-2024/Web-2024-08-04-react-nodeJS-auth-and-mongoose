@@ -1,0 +1,1792 @@
+1. $ npx create-react-app todo 
+
+or
+
+copy some react app to directory todo (see Cookbook03)
+
+2. index.css (just to make it look somehow, just copy-paste):
+
+* {
+  margin: 0;
+}
+
+html, body, #root, .App {
+  height: 100vh;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: rgb(102, 131, 249);
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+}
+
+.wrapper {
+  width: 650px;
+  margin: 0 auto;
+  background: white;
+  padding: 2rem 0;
+  flex-grow: 1;
+}
+
+h1 {
+  text-align: center;
+  color: rgb(23,122,112)
+}
+
+h5 {
+  margin: 20px;
+}
+
+3. App.jsx - we put there wrapper and write the list of todos:
+
+function App() {
+
+  const todos = [
+    {text:'Run 10 km', completed: false, important: false},
+    {text:'Study React for 7 hours', completed: false, important: true},
+    {text:'Wash Dishes', completed: false, important: false},
+    {text:'Buy Eggs and Rice', completed: false, important: true},
+  ]
+  
+  return (
+    <div className="App">
+      <div className="wrapper">
+
+      </div>
+    </div>
+  );
+}
+
+export default App;
+
+4. Now let's start creating components. The first component will be the header.
+
+Creade dir todo/src/components/header and inside two files: 
+Header.css and Header.jsx.
+
+Inside Header.jsx we use snippet "rfc".
+
+Let's change what we've got into:
+
+import "./Header.css";
+
+const Header = () => {
+  return <h1 className="header">TODO</h1>;
+};
+
+export default Header;
+
+5. Header.css:
+
+.header {
+    box-shadow: 5px 5px 5px 5px gray;
+    text-align: center;
+    padding: 2rem;
+    z-index: 10;
+}
+
+6. Now let's import the Header component into App
+and use it:
+
+import Header from './components/header/Header';
+
+function App() {
+
+  const todos = [
+    {text:'Run 10 km', completed: false, important: false},
+    {text:'React for 7 hours', completed: false, important: true},
+    {text:'Wash Dishes', completed: false, important: false},
+    {text:'Buy Eggs and Rice', completed: false, important: true},
+  ]
+
+  return (
+    <div className="App">
+      <Header />
+      <div className="wrapper">
+
+      </div>
+    </div>
+  );
+}
+
+export default App;
+
+7. Create TodoList component:
+
+create src/components/todoList dir.
+Inside create files TodoList.css and TodoList.jsx.
+
+Inside TodoList.jsx we use snippet "rfc" and 
+change what we get into:
+
+import "./TodoList.css";
+
+export default function TodoList() {
+
+  return (
+    <ul>
+        <li>Run 10km<li/>
+        <li>Study React for 7 hours<li/>
+        <li>Buy bread and milk<li/>
+        <li>Go to sleep early<li/>
+    </ul>
+  );
+}
+
+8. And we import it into App.jsx and use it there:
+
+import Header from './components/header/Header';
+import TodoList from './components/todoList/TodoList';
+
+function App() {
+
+  const todos = [
+    {text:'Run 10 km', completed: false, important: false},
+    {text:'React for 7 hours', completed: false, important: true},
+    {text:'Wash Dishes', completed: false, important: false},
+    {text:'Buy Eggs and Rice', completed: false, important: true},
+  ]
+
+  return (
+    <div className="App">
+      <Header />
+      <div className="wrapper">
+
+       <TodoList />
+
+      </div>
+    </div>
+  );
+}
+
+export default App;
+
+9. We'd like to manipulate each item of the list separately, so 
+
+we create new component.
+
+Create src/components/todoItem/TodoItem.css,
+   and src/components/todoItem/TodoItem.jsx
+
+Inside TodoItem.jsx we use snippet "rfc"
+and get the new component structure.
+
+We change it to:
+
+import './TodoItem.css';
+
+export default function TodoItem() {
+  return (
+    <li>
+      <span>
+
+        <input type="checkbox" />
+
+        Buy milk and bread
+
+      </span>
+
+      <button className="delete">&times;</button>
+    </li>
+  )
+}
+
+10. Now we import TodoItem into TodoList and use it there:
+
+import './TodoList.css';
+import TodoItem from '../todoItem/TodoItem';
+
+export default function TodoList() {
+  return (
+    <ul>
+        <TodoItem />
+        <TodoItem />
+        <TodoItem />
+        <TodoItem />
+    </ul>
+  )
+}
+
+11. New option for styling in REACT: through style objects.
+
+We create "style" objects and inside it - object for each component we 
+want to style.
+
+TodoList.jsx:
+
+import './TodoList.css';
+import TodoItem from '../todoItem/TodoItem';
+
+export default function TodoList() {
+
+  const style = {
+    ul: {
+        listStyle: 'none',
+        padding: '0',
+        fontSize: '2rem',
+        color: 'rgb(79,5,79)'
+    }
+  }
+
+12. Now we're going to use the object style.ul for styling <ul>.
+
+The first pair of curly brackets is for JS,
+the second is for object:
+
+import './TodoList.css';
+import TodoItem from '../todoItem/TodoItem';
+
+export default function TodoList() {
+
+  const style = {
+    ul: {
+        listStyle: 'none',
+        padding: '0',
+        fontSize: '2rem',
+        color: 'rgb(79,5,79)'
+    }
+  }
+  
+  return (
+    <ul style={style.ul}>
+        <TodoItem />
+        <TodoItem />
+        <TodoItem />
+        <TodoItem />
+    </ul>
+  )
+}
+
+13. Let's style TodoItem in the similar way.
+
+import './TodoItem.css';
+
+export default function TodoItem() {
+
+    const style = {
+        li: {
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          margin: "1rem 2rem",
+          padding: "0.5rem",
+          border: "1px solid #ccc",
+          borderRadius: "2px"
+        },
+        span: {
+          display: "flex",
+          alignItems: "center"
+        }
+      }
+
+
+  return (
+    <li style={style.li}>
+      <span style={style.span}>
+      ................................................................
+
+14. Just a little bit more into TodoItem.css 
+(or probably, more parts of the style object):
+
+input[type="checkbox"] {
+
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: 0.5rem;
+
+}
+
+input[type="checkbox"]:checked {
+
+    background: rgb(23, 122, 112);/* not working for now */
+
+}
+
+button.delete {
+    font-size: 1.5rem;
+    background: red;
+    border: rgb(130, 12, 12);
+    border-radius: 2px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+button.delete:hover {
+    transform: scale(1.1);
+}
+
+15. Now it looks nicer, but we want the real data from the array "todos"
+in App.
+
+For this we will use props.
+
+Props (we name them after "properties") - are parameters that
+we could pass from the exterior components to the interior components.
+We write them like attributes of the inner components 
+and the attribute name will become the name of the prop when
+the component gets it. 
+The inner componet gets all it's props as one parameter of
+it's function - props are united into one object.
+
+We will create some color, and pass it as a prop for example.
+
+import Header from './components/header/Header';
+import TodoList from './components/todoList/TodoList';
+
+function App() {
+
+  const todos = [
+    {text:'Run 10 km', completed: false, important: false},
+    {text:'React for 7 hours', completed: false, important: true},
+    {text:'Wash Dishes', completed: false, important: false},
+    {text:'Buy Eggs and Rice', completed: false, important: true},
+  ]
+
+  let color = "orange";
+  
+  return (
+    <div className="App">
+      <Header />
+      <div className="wrapper">
+
+       <TodoList importantColor={color} />
+
+      </div>
+    </div>
+  );
+}
+
+export default App;
+
+16. Now we should get this prop from the other side. In TodoList.jsx:
+
+import './TodoList.css';
+import TodoItem from '../todoItem/TodoItem';
+
+export default function TodoList(props) {
+
+  const style = {
+    ul: {
+        listStyle: 'none',
+        padding: '0',
+        fontSize: '2rem',
+        color: 'rgb(79,5,79)',
+        background: props.importantColor
+    }
+  }
+  
+  return (
+    <ul style={style.ul}>
+        <TodoItem />
+        <TodoItem />
+        <TodoItem />
+        <TodoItem />
+    </ul>
+  )
+}
+
+17. OK, this was temporarily, so TodoList.jsx:
+
+import './TodoList.css';
+import TodoItem from '../todoItem/TodoItem';
+
+export default function TodoList(props) {
+
+  console.log(`In TodoList: props.importantColor=${props.importantColor}`)
+
+  const style = {
+    ul: {
+        listStyle: 'none',
+        padding: '0',
+        fontSize: '2rem',
+        color: 'rgb(79,5,79)'
+    }
+  }
+  
+  return (
+    <ul style={style.ul}>
+        <TodoItem />
+        <TodoItem />
+        <TodoItem />
+        <TodoItem />
+    </ul>
+  )
+}
+
+18. Now we pass the array of todos as props in App.jsx:
+
+  return (
+    <div className="App">
+      <Header />
+      <div className="wrapper">
+
+       <TodoList importantColor={color} todos={todos} />
+
+      </div>
+    </div>
+  );
+}
+
+19. And we should get it from the side of TodoList:
+
+import './TodoList.css';
+import TodoItem from '../todoItem/TodoItem';
+
+export default function TodoList(props) {
+
+  console.log(`In TodoList: props.importantColor=${props.importantColor}`)
+  console.log(`props.todos:\n`,props.todos)
+
+20. We see that we can use here destructuring, as "props" is an object:
+
+import './TodoList.css';
+import TodoItem from '../todoItem/TodoItem';
+
+export default function TodoList({importantColor,todos}) {
+
+  console.log(`In TodoList: importantColor=${importantColor}`)
+  console.log(`todos:\n`,todos)
+
+21. But TodoList does not need this array - each <li> needs it, so 
+we give each <li> the "mission" form one object in TodoList.jsx:
+
+  return (
+    <ul style={style.ul}>
+        <TodoItem mission={todos[0].text} />
+        <TodoItem mission={todos[1].text} />
+        <TodoItem mission={todos[2].text} />
+        <TodoItem mission={todos[3].text} />
+    </ul>
+  )
+}
+
+22. So on the side of TodoItem it should get this prop "mission" and use it:
+
+import './TodoItem.css';
+
+export default function TodoItem({mission}) {
+
+    const style = {
+        li: {
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          margin: "1rem 2rem",
+          padding: "0.5rem",
+          border: "1px solid #ccc",
+          borderRadius: "2px"
+        },
+        span: {
+          display: "flex",
+          alignItems: "center"
+        }
+      }
+
+
+  return (
+    <li style={style.li}>
+      <span style={style.span}>
+
+        <input type="checkbox" />
+
+        {mission}
+
+      </span>
+
+      <button className="delete">&times;</button>
+    </li>
+  )
+}
+
+23. But what if there will be bigger or smaller array?
+
+In react we often use map() to create some HTML lists from arrays of
+data. So in TodoList.jsx:
+
+  return (
+    <ul style={style.ul}>
+
+      {todos.map(todo => <TodoItem mission={todo.text} />)}
+
+    </ul>
+  )
+
+  24. Works great, but now we get some warning:
+
+Each child in a list should have a unique "key" prop.
+
+It is important for the Virtual DOM work - to enable it to know all the 
+parts of the list by this unique key and to be eable to know for example,
+which one was deleted or which one was edited.
+
+So, we can use the array IDX, but it could change if we delete some 
+items from the list, so it's better to use some our unique index.
+
+In App.jsx we add index to the objects of todos:
+
+function App() {
+
+  const todos = [
+    {id: 0, text:'Run 10 km', completed: false, important: false},
+    {id: 45, text:'React for 7 hours', completed: false, important: true},
+    {id: 77, text:'Wash Dishes', completed: false, important: false},
+    {id: 1003, text:'Buy Eggs and Rice', completed: false, important: true},
+  ]
+
+It's not important which id is this, and whether it numeric ostring,
+the only thing - it has to be unique.
+
+25. Now in TodoList we create unique key for each item:
+
+  
+  return (
+    <ul style={style.ul}>
+
+      {todos.map(todo => <TodoItem mission={todo.text} key={todo.id} />)}
+
+    </ul>
+  )
+}
+
+And the warning disappears.
+
+26. Let's style our todo items a little bit more. In TodoList.jsx
+we will send as props the whole todo object and it's idx:
+
+  return (
+    <ul style={style.ul}>
+
+      {todos.map((todo,idx) => 
+        <TodoItem mission={todo} key={todo.id} idx={idx+1} 
+                   impColor={importantColor} />)}
+
+    </ul>
+  )
+
+27. Let's use it from the side of TodoItem:
+
+import './TodoItem.css';
+
+export default function TodoItem({mission, impColor, idx}) {
+
+    const { text, important, completed } = mission;
+
+    const style = {
+        li: {
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          margin: "1rem 2rem",
+          padding: "0.5rem",
+          border: "1px solid #ccc",
+          borderRadius: "2px",
+          background: important?impColor:"inherit"
+        },
+        span: {
+          display: "flex",
+          alignItems: "center"
+        }
+      }
+
+
+  return (
+    <li style={style.li}>
+      <span style={style.span}>
+
+        <input type="checkbox" />
+
+        <strong>{idx + '.\xa0'}</strong>{text}
+
+      </span>
+
+      <button className="delete">&times;</button>
+    </li>
+  )
+}
+
+28. STATE - what state is - state, well, contains 
+the state of the part of the app. There could be as many states as
+we need in one app. State could be a primitive or a complex value.
+React virtual DOM decides upon the changes of states if to re-render
+some component. State is an immutable variable - we should not
+change it. We could only supply the special React virtual DOM 
+function with a new value for the state.
+
+To create a state we use React HOOK function useState() - it performs
+two things: 1. creates an array of 2 elements: state variable,
+and the only function that could change state,
+2. Sets the initial value of the state.
+
+Let's see some example of state.
+
+For this we need to import hook useState.
+
+What HOOKS are - these are special React functions that, well,
+"hooks" the core parts of React - work with the core parts of
+react. For example, states are crucial for the right virtual DOM
+management, so we use useState() hook to create them and the only
+functions that are allowed to change them.
+
+29. In App.jsx (example of state) we import the hook useState:
+
+import { useState } from 'react';
+
+import Header from './components/header/Header';
+import TodoList from './components/todoList/TodoList';
+
+30. Now we use it to create state and the only function that 
+allowed to change it. Destructuring. 
+
+The right side of the assignment calls useState('white')
+function. It creates the two-element array, which 
+we destructure on the left side: getting the state variables 
+wrapperColor and the only function that is allowed to change it -
+setWrappercolor. useState() also sets the inital value of 
+wrapperColor to 'white'.
+
+function App() {
+
+  const [ wrapperColor, setWrapperColor ] = useState('white');
+
+31. State should be responsible for render, so let's use it:
+
+return (
+    <div className="App">
+      <Header />
+      <div className="wrapper" style={{background: wrapperColor}}>
+
+32. Let's temporarily add some button to see how the change of state
+affects the render.
+
+return (
+    <div className="App">
+      <Header />
+      <div className="wrapper" style={{background: wrapperColor}}>
+
+        <button>Change Color</button>
+
+       <TodoList importantColor={color} todos={todos} />
+
+      </div>
+    </div>
+  );
+
+33. We create function that will handle the color change.
+Immutability of state - we're not allowed to change state by 
+ourselves - as React Virtual Dom should keep it and should 
+keep all the previous states too. So we use for this 
+every time the special function that was created together with
+state and we supply it each time with a new value for the state.
+
+function App() {
+
+  const [ wrapperColor, setWrapperColor ] = useState('white');
+
+  const todos = [
+    {id: 0, text:'Run 10 km', completed: false, important: false},
+    {id: 45, text:'React for 7 hours', completed: false, important: true},
+    {id: 77, text:'Wash Dishes', completed: false, important: false},
+    {id: 1003, text:'Buy Eggs and Rice', completed: false, important: true},
+  ]
+
+  let color = "orange";
+
+  const changeColor = () => {
+
+    setWrapperColor(wrapperColor==='white'?'salmon'
+           :wrapperColor==='salmon'?'lightblue'
+           :wrapperColor==='lightblue'?'lightgreen':'white');
+
+  }
+  
+  return (
+
+34. Now we will use this function on click event. Pay attention,
+that here this attribute is being written with camel case, not like
+in the usual HTML:
+
+  return (
+    <div className="App">
+      <Header />
+      <div className="wrapper" style={{background: wrapperColor}}>
+
+        <button onClick={changeColor}>Change Color</button>
+
+       <TodoList importantColor={color} todos={todos} />
+
+      </div>
+    </div>
+  );
+
+35. How React handles state - when we change it - 
+it is still a previous render, so we will see the old value.
+But React virtual DOM has already triggered the re-render, so we
+will see the actual new value if we check it before running 
+return() for example - as it happens during the new render.
+
+But the change of state causes render, so if we would like to see
+the state's value after the change we should just put it somewhere
+in App function and this new value will be seen through the render.
+
+function App() {
+
+  const [ wrapperColor, setWrapperColor ] = useState('white');
+  
+  console.log(`wrapperColor outside "changeColor" function is ${wrapperColor}`)
+  
+  const todos = [
+    {id: 0, text:'Run 10 km', completed: false, important: false},
+    {id: 45, text:'React for 7 hours', completed: false, important: true},
+    {id: 77, text:'Wash Dishes', completed: false, important: false},
+    {id: 1003, text:'Buy Eggs and Rice', completed: false, important: true},
+  ]
+
+  let color = "orange";
+
+  const changeColor = () => {
+
+    console.log(`wrapperColor before the change is ${wrapperColor}`)
+    
+    setWrapperColor(wrapperColor==='white'?'salmon'
+    :wrapperColor==='salmon'?'lightblue'
+    :wrapperColor==='lightblue'?'lightgreen':'white');
+    
+    console.log(`wrapperColor after the change is ${wrapperColor}`)
+
+  }
+  
+36. Let's make one more state, for this we will create one more button:
+
+  return (
+    <div className="App">
+      <Header />
+      <div className="wrapper" style={{background: wrapperColor}}>
+
+        <button onClick={changeColor}>Change Color</button>
+        <button>Change App Title</button>
+
+       <TodoList importantColor={color} todos={todos} />
+
+      </div>
+    </div>
+  );
+
+37. MISSION: a) In App: Create state appTitle 
+             b) Pass it as a prop to <Header />
+             c) Get it in the <Header /> and show instead of the previous title
+             d) In App: Create function changeTitle,
+                 that has an array of titles and chooses new title randomly
+             e) Add this function to the onClick of the button
+
+38. Now we should Convert our array of todos to a state,
+    as it should affect render. App.jsx
+
+    import { useState } from 'react';
+
+import Header from './components/header/Header';
+import TodoList from './components/todoList/TodoList';
+
+function App() {
+
+  const [ wrapperColor, setWrapperColor ] = useState('white');
+  const [ appTitle, setAppTitle ] = useState('TODO');
+  
+  console.log(`wrapperColor outside "changeColor" function is ${wrapperColor}`)
+  
+  const [ todos, setTodos ] = useState([
+    {id: 0, text:'Run 10 km', completed: false, important: false},
+    {id: 45, text:'React for 7 hours', completed: false, important: true},
+    {id: 77, text:'Wash Dishes', completed: false, important: false},
+    {id: 1003, text:'Buy Eggs and Rice', completed: false, important: true},
+  ]);
+
+  let color = "orange";
+
+  const changeColor = () => {
+
+    console.log(`wrapperColor before the change is ${wrapperColor}`)
+    
+    setWrapperColor(wrapperColor==='white'?'salmon'
+    :wrapperColor==='salmon'?'lightblue'
+    :wrapperColor==='lightblue'?'lightgreen':'white');
+    
+    console.log(`wrapperColor after the change is ${wrapperColor}`)
+
+  }
+
+  const changeTitle = () => {
+
+    const titles = ['TODO','JOKES','VOCABULARY','*Great Title*'];
+
+    setAppTitle(titles[Math.floor(Math.random()*titles.length)])
+
+  }
+  
+  return (
+    <div className="App">
+      <Header appTitle={appTitle} />
+      <div className="wrapper" style={{background: wrapperColor}}>
+
+        <button onClick={changeColor}>Change Color</button>
+        <button onClick={changeTitle}>Change App Title</button>
+
+       <TodoList importantColor={color} todos={todos} />
+
+      </div>
+    </div>
+  );
+}
+
+export default App;
+
+39. We're going to change status of one mission to completed
+or to "not completed". 
+For it's sake we'll add to TodoItem.css:
+
+.completed {
+  text-decoration: line-through;
+}
+
+40. Now we change the status of one of the missions in the todos
+array to "completed" and add to the span the className completed 
+for the case that the Item is completed
+
+import './TodoItem.css';
+
+export default function TodoItem({mission, impColor, idx}) {
+
+    const { text, important, completed } = mission;
+
+    const style = {
+        li: {
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          margin: "1rem 2rem",
+          padding: "0.5rem",
+          border: "1px solid #ccc",
+          borderRadius: "2px",
+          background: important?impColor:"inherit"
+        },
+        span: {
+          display: "flex",
+          alignItems: "center"
+        }
+      }
+
+
+  return (
+    <li style={style.li}>
+      <span style={style.span} 
+            className={completed?"completed":""}>
+
+        <input type="checkbox" />
+
+        <strong>{idx + '.\xa0'}</strong>{text}
+
+      </span>
+
+      <button className="delete">&times;</button>
+    </li>
+  )
+}
+
+41. The data is an App, so we can create in App
+the function that can change the status of completed:
+changeCompleted(id).
+
+import { useState } from "react";
+import AddTodo from './components/addTodo/AddTodo';
+import Header from "./components/header/Header";
+import TodoList from "./components/todoList/TodoList";
+
+function App() {
+  const [wrapperColor, setWrapperColor] = useState("white");
+  const [appTitle, setAppTitle] = useState("Todo App");
+
+  const color = "orange";
+
+  const [todos, setTodos] = useState([
+    { id: 1, text: "Run 10 km", completed: true, important: false },
+    { id: 22, text: "React for 7 hours", completed: false, important: true },
+    { id: 73, text: "Wash Dishes", completed: false, important: false },
+    { id: 1004, text: "Buy Eggs and Rice", completed: false, important: true },
+  ]);
+
+  const changeCompleted = (id) => {
+
+    const newTodos = todos.map(todo => {
+
+      if (todo.id === id) todo.completed = !todo.completed;
+      return todo;
+
+    })
+
+    setTodos(newTodos);
+
+  }
+
+  console.log(`wrapperColor outside "changeColor" function is ${wrapperColor}`);
+
+  const changeColor = () => {
+    console.log(`wrapperColor before the change is ${wrapperColor}`);
+
+    setWrapperColor(
+      wrapperColor === "white"
+        ? "lightblue"
+        : wrapperColor === "lightblue"
+        ? "lightgreen"
+        : "white"
+    );
+    console.log(`wrapperColor after the change is ${wrapperColor}`);
+  };
+
+  const changeTitle = () => {
+    const titles = [
+      "Todo App",
+      "Todo List",
+      "Todo",
+      "To-Do List",
+      "To-Do App",
+      "To-Do",
+    ];
+
+    setAppTitle(titles[Math.floor(Math.random() * titles.length)]);
+  };
+
+return (
+    <div className="App">
+      <Header appTitle={appTitle} />
+      <div className="wrapper" style={{background:wrapperColor}}>
+        <button onClick={changeColor}>Change Color</button>
+        <button onClick={changeTitle}>Change Title</button>
+
+        <TodoList importantColor={color} todos={todos} />
+      </div>
+    </div>
+  );
+}
+
+export default App;
+
+42. And we should pass this function to TodoItem as only 
+the Item knows which "id" should be changed. But App cannot 
+pass prop directly to TodoItem, so it passes this function 
+first to TodoList:
+
+return (
+    <div className="App">
+      <Header appTitle={appTitle} />
+      <div className="wrapper" style={{background:wrapperColor}}>
+        <button onClick={changeColor}>Change Color</button>
+        <button onClick={changeTitle}>Change Title</button>
+
+        <TodoList importantColor={color} todos={todos}
+                  changeCompleted={changeCompleted} />
+      </div>
+    </div>
+  );
+
+43. So TodoList should get it as a prop and pass it 
+to each TodoItem:
+
+import './TodoList.css';
+import TodoItem from '../todoItem/TodoItem';
+
+export default function TodoList({importantColor,todos,
+                                  changeCompleted}) {
+
+  console.log(`In TodoList: importantColor=${importantColor}`)
+  console.log(`todos:\n`,todos)
+
+  const style = {
+    ul: {
+        listStyle: 'none',
+        padding: '0',
+        fontSize: '2rem',
+        color: 'rgb(79,5,79)'
+    }
+  }
+
+return (
+    <ul style={style.ul}>
+
+      {todos.map((todo,idx) => 
+        <TodoItem mission={todo} key={todo.id} idx={idx+1} 
+                   impColor={importantColor}
+                   changeCompleted={changeCompleted} />)}
+
+    </ul>
+  )
+
+44. TodoItem should get it now as a prop and use
+(as it needs here id, we get it too by destrucutring 
+of todo):
+
+import "./TodoItem.css";
+
+export default function TodoItem({ todo, num, importantColor,
+                                   changeCompleted }) {
+
+  const { id, text, completed, important } = todo;
+
+  const defaultColor = "white";
+  const style = {
+    li: {
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+      margin: "1rem 2rem",
+      padding: "0.5rem",
+      border: "1px solid #ccc",
+      borderRadius: "2px",
+      background: important ? importantColor : defaultColor,
+    },
+    span: {
+      display: "flex",
+      alignItems: "center",
+    },
+    checkbox: {
+      marginRight: "1rem",
+    },
+  };
+
+  return (
+    <li style={style.li}>
+      <span style={style.span}
+            className={completed?"completed":""}>
+        <input type="checkbox" style={style.checkbox}
+            checked={completed} 
+            onChange={() => {changeCompleted(id)}} />
+        <strong>{num + ".\xa0"}</strong>
+        {text}
+      </span>
+      <button className="delete">&times;</button>
+    </li>
+  );
+}
+
+45. In App.jsx
+   let just add console.log(todos) before "return()"
+   and ensure that we see that array "todos" changes
+   with each change of "completed"
+
+46. Just a couple of ajustments in CSS to make it 
+   less annoying:
+
+   TodoItem.css: (add padding-block: 0,
+   to make the "x" on the "delete" button to look
+   more centered)
+
+   button.delete {
+    font-size: 1.5rem;
+    background: red;
+    border: rgb(130, 12, 12);
+    border-radius: 2px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    padding-block: 0;
+   }
+
+  index.css: add 
+
+  button {
+    cursor: pointer;
+  }
+
+47. It is something to make it look less annoying,
+   but also worse mentioning.
+
+   We've talked till now about 3 styling options:
+
+   - general CSS 
+   - component CSS 
+   - style object 
+
+   Let's use here style object inline. Not
+   the best practice, but the best practice in 
+   styling is anyway to be consistend and we're not,
+   as we want to show different options.
+
+   So, in App.js, for the left auxillary button:
+
+    <button onClick={changeColor}
+                style={{marginLeft: "2rem"}}>
+               Change Color
+    </button>
+
+    Important to pay attention that the first 
+    pair of brackets is for JS and the internal pair
+    is for object. Why do we have only one pair 
+    when we declare object outside?
+
+    Important to remind that the properties now 
+    are part of JS (they're properties of JS object),
+    so they're written not in CSS notation,
+    but in camel case. And the values are in quotes.
+
+    SMALL MISSION: add font-size = 1.8rem to 
+    this button and to the second button and
+    make this with the inline style object.
+
+    Now they looks like:
+
+    <button onClick={changeColor}
+                style={{marginLeft: "2rem",
+                        fontSize: "1.2rem"}}>
+               Change Color
+    </button>
+    <button onClick={changeTitle}
+            style={{fontSize: "1.2rem"}}>
+            Change Title
+    </button>
+
+48. Let's in App.js write "removeTodo(id)" function.
+   We cannot just delete the appropriate element 
+   of the array "todos" (with splice(), for example),
+   WHY?
+
+   We should keep state immutable and prepare 
+   for setTodos() new array.
+
+   So, which function will create new array from the
+   old one, but without some element? Right, filter.
+
+    const removeTodo = (id) => {
+
+        const newTodos = todos.filter(todo => todo.id !== id);
+        setTodos(newTodos);
+
+    }
+
+49. MISSION: 
+    a) pass the function "removeTodo(id)" 
+   as a prop named "deleteTodo" to TodoList component 
+    b) get it there 
+    c) pass it forward to TodoItem 
+    d) get it there
+    e) use it in "onClick" of the "delete" button
+
+50. The results of the MISSION in App.jsx:
+
+    <TodoList importantColor={color} todos={todos}
+                    changeCompleted={changeCompleted}
+                    deleteTodo={removeTodo} />
+
+   In TodoList.jsx:
+
+    
+    export default function TodoList({todos,importantColor,
+                              changeCompleted, deleteTodo}) {
+    .....................................................
+        return (
+            <ul style={style.ul}>
+            {todos.map((todo,idx) => (
+                <TodoItem
+                key={todo.id}
+                todo={todo}
+                num={idx+1}
+                importantColor={importantColor}
+                changeCompleted={changeCompleted}
+                deleteTodo={deleteTodo}
+                />
+            ))}
+            </ul>
+        );
+        }
+
+   In TodoItem.jsx:
+
+   export default function TodoItem({ todo, num, importantColor,
+                            changeCompleted, deleteTodo }) {
+
+   ..................................................
+      <button className="delete"
+              onClick={() => {deleteTodo(id)}}>
+        &times;
+      </button>
+    </li>
+  
+51. Now we can delete todos! But when we delete them all 
+   the page looks as it could not load, so we should 
+   explain the user that everything is OK. 
+
+   In TodoList.jsx:
+
+  return (
+    <ul style={style.ul}>
+      {todos.length > 0 ? todos.map((todo,idx) => (
+        <TodoItem
+          key={todo.id}
+          todo={todo}
+          num={idx+1}
+          importantColor={importantColor}
+          changeCompleted={changeCompleted}
+          deleteTodo={deleteTodo}
+        />
+      ))  :
+      <h5>No more TODOs</h5>}
+    </ul>
+  );
+
+52. And fix margin in index.css:
+
+h5 {
+  margin: 2rem;
+}
+
+53. Let's look again inside TodoList.jsx:
+
+We could make "return()" may be cleaner and more readable. 
+Let's get the logic out of it:
+
+  let showTodos = todos.length > 0 ? todos.map((todo,idx) => (
+      <TodoItem key={todo.id} todo={todo} num={idx+1}
+        importantColor={importantColor}
+        changeCompleted={changeCompleted}
+        deleteTodo={deleteTodo}
+      />
+    ))  :
+    <h5>No more TODOs</h5>;
+
+  return (
+    <ul style={style.ul}>
+      {showTodos}
+    </ul>
+  );
+
+  What do you think?
+
+  OK. It's subjective.
+
+54. Till now we've created function inside App.jsx and passed it 2 layers.
+    But we've got other option: we could use "context". 
+    Context envelops application or parts of the application,
+    and any component that is enveloped by it could get to it and 
+    use the values that it bares with it.
+
+    We could create more than one context - for different purposes 
+    or parts of the application. When we create the enveloping part of
+    the context - we call it <Context.Provider> as it will hold 
+    the object called "value" comprised of the values that we need
+    to hold in the context. 
+
+    When we create the part that uses the value from a context, 
+    we call it Context Consumer. 
+    To create context consumer we should choose from which context 
+    it will use the value and to use hook called useContext - this 
+    hook will get the value object out of the context.
+
+    Pay attention that components subscribed to a context will rerender 
+    together with the value change, so Context is not totally good for
+    performance, and if we could use just a prop simply in some case -
+    it's better.
+
+    Let's create context for our app. There could be more than one context,
+    so we better create it inside some dir.
+
+    src/contexts/context.js:
+
+    import React from 'react';
+
+    // Context - is just a name of this context
+    const Context = React.createContext();
+
+    export default Context;
+
+55. In App.jsx we will envelope the whole application by the context:
+
+    For this we need import it:
+
+    import { useState } from "react";
+    import Context from './contexts/context';
+    import Header from "./components/header/Header";
+    import TodoList from "./components/todoList/TodoList";
+
+    And make it envelope:
+
+      return (
+    <Context.Provider >
+    <div className="App">
+      <Header appTitle={appTitle} />
+      <div className="wrapper" style={{ background: wrapperColor }}>
+        <button onClick={changeColor}
+                style={{marginLeft: "2rem",
+                        fontSize: "1.2rem"}}>
+               Change Color
+        </button>
+        <button onClick={changeTitle}
+                style={{fontSize: "1.2rem"}}>
+               Change Title
+        </button>
+        <TodoList importantColor={color} todos={todos}
+                  changeCompleted={changeCompleted}
+                  deleteTodo={removeTodo} />
+      </div>
+    </div>
+    </Context.Provider>
+  );
+
+56. Context.Provider shuld provide other layers of the
+application with values.
+Let's create some value to see how we use it:
+
+  function App() {
+    const [wrapperColor, setWrapperColor] = useState("white");
+    const [appTitle, setAppTitle] = useState("Todo App");
+
+    const color = "orange";
+    let comment = 'Just to show that we\'re using Context ...'; 
+
+  ................................................................................................................................
+
+    console.log(todos);
+
+    return (
+        <Context.Provider value={{comment:comment}}>
+        <div className="App">
+
+   The outer curly brackets are for JS,
+            the inner curly brackets are for the "value" object
+
+57. Let's skip the layer of TodoList between App and TodoItem 
+and jump directly from App to TodoItem:
+
+   This layer will use Context, so it'll be the Context consumer.
+
+   NEW HOOK: useContext 
+
+    import "./TodoItem.css";
+    import { useContext } from 'react';
+    import Context from '../../contexts/context';
+
+    export default function TodoItem({ todo, num, importantColor,
+                            changeCompleted, deleteTodo }) {
+
+        const { comment } = useContext(Context);
+        console.log(comment);
+
+58. Now let's pass the function removeTodo(id) through the Context too.
+
+   In App we add it to the Context.Provider
+   and remove it from the props of TodoList:
+
+     return (
+    <Context.Provider value={{comment:comment, removeTodo:removeTodo}}>
+    <div className="App">
+      <Header appTitle={appTitle} />
+      <div className="wrapper" style={{ background: wrapperColor }}>
+        <button onClick={changeColor}
+                style={{marginLeft: "2rem",
+                        fontSize: "1.2rem"}}>
+               Change Color
+        </button>
+        <button onClick={changeTitle}
+                style={{fontSize: "1.2rem"}}>
+               Change Title
+        </button>
+        <TodoList importantColor={color} todos={todos}
+                  changeCompleted={changeCompleted} />
+      </div>
+    </div>
+    </Context.Provider>
+  );
+
+59. Now we should not mention it in TodoList at all:
+
+export default function TodoList({todos,importantColor,
+                              changeCompleted}) {
+  const style = {
+    ul: {
+      listStyle: "none",
+      padding: "0",
+      fontSize: "2rem",
+      color: "black",
+    },
+  };
+
+  let showTodos = todos.length > 0 ? todos.map((todo,idx) => (
+      <TodoItem key={todo.id} todo={todo} num={idx+1}
+        importantColor={importantColor}
+        changeCompleted={changeCompleted}
+      />
+
+60. In TodoItem:
+
+We should not get it now as a prop, but as a value from the Context:
+
+export default function TodoItem({ todo, num, importantColor,
+                            changeCompleted }) {
+
+  const { comment, removeTodo } = useContext(Context);
+  console.log(comment);
+
+................................................................
+
+<button className="delete"
+              onClick={() => {removeTodo(id)}}>
+        &times;
+      </button>
+
+Let's ensure that everything still works.
+
+61. One last touch for this matter.
+    In the modern JS object notation if the name of the
+    property is the same as the name of the variable that
+    contains it value, we could shorten the notation.
+
+    In App, instead of 
+
+    <Context.Provider value={{comment:comment, removeTodo:removeTodo}}>
+
+    We could write:
+
+    <Context.Provider value={{comment, removeTodo}}>
+
+62. Still works!
+
+63. The last component that we'll create here is AddTodo.
+So, create dir src/components/addTodo, and inside - 2 files:
+
+AddTodo.CSS
+AddTodo.jsx
+
+Inside AddTodo.jsx we use snippet 'rfc' and change the component to
+look:
+
+import './AddTodo.css';
+
+export default function AddTodo() {
+
+  return (
+    <>
+
+        <h3 style={{margin: "1rem 2rem"}}>Add Todo:</h3>
+        <form className="AddTodoForm">
+
+            <input type="text" name="mission" required />
+
+            <label htmlFor="important">Important?</label>    
+            <input type="checkbox" name="important" id="important" />
+            <button type="submit">Add</button>
+
+        </form>
+
+    </>
+  )
+}
+
+64. And we put some styles into AddTodo.css:
+
+.AddTodoForm {
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    margin-left: 2rem;
+    gap: 1.5rem;
+}
+
+.AddTodoForm input, .AddTodoForm button {
+    padding: 5px;
+    font-size: 1.2rem;
+}
+
+65. When we use form in React we usually collect the form data 
+into some state and when "submit" event happens we're redy
+with the data. So in AddTodo we'll create state in a form 
+of an object.
+
+import './AddTodo.css';
+import { useState, useContext } from 'react';
+import Context from '../../contexts/context';
+
+export default function AddTodo() {
+
+  const { addNew } = useContext(Context);
+
+  const [ formData, setFormData ] = useState({
+                                        mission: '',
+                                        important: false
+                                    });
+
+66. Let's add to the text input the handling for the Change 
+event, and also we'll show the formData before the 
+return() part:
+
+console.log(formData);
+  return (
+    <>
+
+        <h3 style={{margin: "1rem 2rem"}}>Add Todo:</h3>
+        <form className="AddTodoForm" onSubmit={onSubmit}>
+
+            <input type="text" name="mission" required
+                onChange={(e) => setFormData({...formData,
+                                              mission: e.target.value})} />
+            
+   Now we see that each change in the input field causes 
+   the state change and re-render.
+
+67. Let's add the treatment for the "important" field too.
+
+  console.log(formData);
+  return (
+    <>
+
+        <h3 style={{margin: "1rem 2rem"}}>Add Todo:</h3>
+        <form className="AddTodoForm">
+
+            <input type="text" name="mission" required
+                onChange={(e) => setFormData({...formData,
+                                              mission: e.target.value})} />
+
+            <label htmlFor="important">Important?</label>    
+            <input type="checkbox" name="important" id="important"
+                onChange={(e) => setFormData({...formData,
+                                        important: e.target.checked})} />
+            <button type="submit">Add</button>
+
+        </form>
+
+    </>
+  )
+
+68. Now we'll create in App function addNew() to add new todo 
+while the function is getting the form data (and we'll
+add this function to the context too, just in usual life
+we would probably pass this function as a prop, as this is
+one step only and adding too much values to the context
+could diminish the performance):
+
+import { useState } from "react";
+import AddTodo from './components/addTodo/AddTodo';
+import Header from "./components/header/Header";
+import TodoList from "./components/todoList/TodoList";
+
+import Context from './contexts/context';
+
+function App() {
+  const [wrapperColor, setWrapperColor] = useState("white");
+  const [appTitle, setAppTitle] = useState("Todo App");
+
+  const color = "orange";
+  const comment = "I am comment and I am sitting in the Context";
+
+  const [todos, setTodos] = useState([
+    { id: 1, text: "Run 10 km", completed: true, important: false },
+    { id: 22, text: "React for 7 hours", completed: false, important: true },
+    { id: 73, text: "Wash Dishes", completed: false, important: false },
+    { id: 1004, text: "Buy Eggs and Rice", completed: false, important: true },
+  ]);
+
+  const changeCompleted = (id) => {
+
+    const newTodos = todos.map(todo => {
+
+      if (todo.id === id) todo.completed = !todo.completed;
+      return todo;
+
+    })
+
+    setTodos(newTodos);
+
+  }
+
+  const removeTodo = (id) => {
+
+    setTodos(todos.filter(todo => todo.id !== id ));
+
+  }
+
+  const addNew = ({mission, important}) => {
+
+    const newTodos = todos.concat({text:mission, important,
+                        completed: false, id: Date.now()
+                    });
+
+    setTodos(newTodos);
+
+  }
+
+  console.log(`wrapperColor outside "changeColor" function is ${wrapperColor}`);
+
+  const changeColor = () => {
+    console.log(`wrapperColor before the change is ${wrapperColor}`);
+
+    setWrapperColor(
+      wrapperColor === "white"
+        ? "lightblue"
+        : wrapperColor === "lightblue"
+        ? "lightgreen"
+        : "white"
+    );
+    console.log(`wrapperColor after the change is ${wrapperColor}`);
+  };
+
+  const changeTitle = () => {
+    const titles = [
+      "Todo App",
+      "Todo List",
+      "Todo",
+      "To-Do List",
+      "To-Do App",
+      "To-Do",
+    ];
+
+    setAppTitle(titles[Math.floor(Math.random() * titles.length)]);
+  };
+
+  console.log(todos)
+  return (
+    <Context.Provider value={{comment, removeTodo, addNew}}>
+    <div className="App">
+      <Header appTitle={appTitle} />
+      <div className="wrapper" style={{ background: wrapperColor }}>
+        <button onClick={changeColor} style={{marginLeft: "2rem"}}>Change Color</button>
+        <button onClick={changeTitle}>Change Title</button>
+        <AddTodo />
+        <TodoList importantColor={color} todos={todos}
+                  changeCompleted={changeCompleted} />
+      </div>
+    </div>
+    </Context.Provider>
+  );
+}
+
+export default App;
+
+69. Now in AddTodo we should get this function from the context and
+use it in onSubmit function (reminder: when submitting form
+we should prevent the default HTML behaviour that refreshes the
+page):
+
+import './AddTodo.css';
+import { useState, useContext } from 'react';
+import Context from '../../contexts/context';
+
+export default function AddTodo() {
+
+  const { addNew } = useContext(Context);
+
+  const [ formData, setFormData ] = useState({
+                                        mission: '',
+                                        important: false
+                                    });
+
+  function onSubmit(e) {
+
+    e.preventDefault();
+
+    if (formData.mission) {
+
+        addNew(formData);
+
+    }
+
+  }
+
+  console.log(formData);
+  return (
+    <>
+
+        <h3 style={{margin: "1rem 2rem"}}>Add Todo:</h3>
+        <form className="AddTodoForm" onSubmit={onSubmit}>
+
+70. It works. But when the data is added, it still shows in the
+fields and in formData object.
+
+So we will empty the formData object:
+
+  function onSubmit(e) {
+
+    e.preventDefault();
+
+    if (formData.mission) {
+
+        addNew(formData);
+        setFormData({
+            mission: '',
+            important: false
+        });
+
+    }
+
+  }
+
+71. And in React, when dealing with forms, there is a "controlled form" 
+treatment, that connects the values of the states and the values of the
+form fields by-directionnally, so not only the change in 
+the field will affect the state, but the change of the state will affect
+the form fields too:
+
+import './AddTodo.css';
+import { useState, useContext } from 'react';
+import Context from '../../contexts/context';
+
+export default function AddTodo() {
+
+  const { addNew } = useContext(Context);
+
+  const [ formData, setFormData ] = useState({
+                                        mission: '',
+                                        important: false
+                                    });
+
+  function onSubmit(e) {
+
+    e.preventDefault();
+
+    if (formData.mission) {
+
+        addNew(formData);
+        setFormData({
+            mission: '',
+            important: false
+        });
+
+    }
+
+  }
+
+  console.log(formData);
+  return (
+    <>
+
+        <h3 style={{margin: "1rem 2rem"}}>Add Todo:</h3>
+        <form className="AddTodoForm" onSubmit={onSubmit}>
+
+            <input type="text" name="mission" required
+                value={formData.mission}
+                onChange={(e) => setFormData({...formData,
+                                              mission: e.target.value})} />
+            
+            {/* CONTROLLED INPUT: in REACT it's bi-directional
+            effect of the input fields on the state and vice virsa */}
+            <label htmlFor="important">Important?</label>    
+            <input type="checkbox" name="important" id="important"
+                checked={formData.important} 
+                onChange={(e) => setFormData({...formData,
+                                        important: e.target.checked})} />
+            <button type="submit">Add</button>
+
+        </form>
+
+    </>
+  )
+}
+
+72. Mazal Tov! It's a TODO list app.
+
+

@@ -1,0 +1,44 @@
+EVENT LOOP ALGORITHM:
+
+-- ONLY when the stack is empty, check what's going on in 
+    the queues above and execute everything 
+    from the bottom to the top of the stack.
+
+-- Check the micro stack and, if necessary, 
+   execute everything there with the help of the stack, 
+   one micro-task at a time, until the microtask queue 
+   is empty or no longer requires execution, 
+   and ONLY THEN check the macro stack.
+
+-- Check the macro stack and, if necessary, 
+   execute everything there using the stack.
+
+/**************************************************/
+
+In JavaScript, what is the difference between microtasks and tasks?
+
+A macro task is a collection of distinct and independent tasks. 
+Microtasks are minor tasks that update the state of an application and 
+should be completed before the browser moves on to other activities, 
+such as re-rendering the user interface. 
+Promise callbacks and DOM modification changes are examples of microtasks.
+
+What is the difference between a task queue and a call stack?
+
+It's up to it to check whether the callstack is empty and 
+whether the task queue has any pending tasks to complete. 
+If the callstack is empty, it will push the job from the queue to the callstack, 
+where it will be processed.
+
+Is a call stack similar to a queue?
+
+This type of stack is often referred to as an execution stack, control stack, 
+run-time stack, or machine stack, and is frequently abbreviated as "the stack." 
+In summary, a job queue is a list of tasks to be completed 
+(typically maintained persistently), while a call stack is a collection of functions.
+
+What happens when the maximum call stack size is reached?
+
+When there are too many function calls or a function lacks a base case, 
+the JavaScript exception "too much recursion" or "Maximum call stack size exceeded"
+or "stack overflow" occurs.

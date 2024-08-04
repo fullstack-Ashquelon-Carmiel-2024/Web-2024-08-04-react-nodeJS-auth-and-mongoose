@@ -1,0 +1,14 @@
+@use '../../_base.scss';
+
+.addUser {
+
+    button {
+        @include base.big-text-shadow;
+
+        &:hover {
+
+            @include base.big-text-shadow($main-color: white);
+
+        }
+    }
+}

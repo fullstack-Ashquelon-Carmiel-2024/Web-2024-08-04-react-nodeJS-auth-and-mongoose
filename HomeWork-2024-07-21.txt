@@ -1,0 +1,75 @@
+CHALLENGEs are OPTIONAL
+
+00. Create directory panda/your_name/hw/hw-2024-07-21
+00. Create directory panda/your_name/projects/10-hanoy-towers
+00. Create directory panda/your_name/projects/11-shopping-carts
+00. Create directory panda/your_name/projects/12-game-portal
+
+0. Projects
+   00-portfolio - get some ideas, what do you want 
+   00-tic-tac-toe - 30.04.2024
+   01-is-it-a-prime-number - 30.04.2024
+   02-css-explanator - 30.04.2024
+   03-questionnaire - 8.05.2024
+   04-binary-guessing - 16.05.2024 - small groups
+   05-string-games - "fix the clock","random quote",
+       "palindrome", "gematria", "anagrams" parts
+       and the last part - "words-in-word" - finish the project - 26.06.2024
+   06-nim - 23.05.2024 - small groups
+   07-hangman - 5.06.2024 - small groups
+         with both "mouse click" and "keyboard" events,
+         with minimum of the listeners - using
+                         event propagation
+
+   08-NodeJS-SQL-Your-Theme - continue with your theme
+                           in accordance to the cookbook02.
+                           See exercises 1. and 2. below.
+                           19.06.2024
+
+   09-calculator - 16.06.2024 - build it with css GRID,
+          use both "mouse click" and "keyboard" events,
+          with minimum of the listeners - using
+                         event propagation.
+          It should perform the actions: +,-,*,/,%,power,
+          root, factorial, translating number from binary 
+          to decimal, from decimal to binary, from hexadecimal
+          to decimal, from decimal to hexadecimal.
+          Optionally: translating numbers from decimal to 
+          roman and from roman to decimal.
+          Optionally - more functions.
+      This project will be evaluated for the themes of:
+        "algorithms and advanced DOM".
+
+   10-hanoy-towers - finish tbd + improve + 
+      see recursion-algorithm.txt and calculate the max number of steps for the player
+      + challenge - create recursive movement of the disks - 17.07.2024
+
+   11-shopping-carts - the requirements are in 
+        projects/11-shopping-carts/about-shopping-carts.txt - 17.07.2024
+
+   12-react-game-portal - the requirements are in
+        projects/12-react-game-portal/about.txt - 30.07.2024
+
+   Optional Projects:
+      - Canvas "Breakout Game"
+      - "Endless Dangers" - see the description below
+      - "Dreidel"
+      - "Memory Game" - see the beginning files and 
+          the example of how to flip card inside 
+          the "projects/optional/memory-game" dir
+      - "Math Practice" - Optional project of math-practice 
+         with drops containing math exercises and 
+         going down. 
+         When the player types right answer, 
+         the drop should stop or disappear or 
+         make some other response. 
+      - "One page site with smooth scrolling" - like YummyIsrael
+
+
+1. Use Burger.jsx and BurgerStyle.css (inside react/bulls-and-cows/src/learn)
+
+to practice useRef and useEffect - MISSIONS 04 and 05. 
+
+https://github.com/fullstack-Ashquelon-Carmiel-2024/Web-2024-07-21-React-useRef-async-await.git
+
+Reminder. To submit it use the directions from react/react-app-deployment.txt

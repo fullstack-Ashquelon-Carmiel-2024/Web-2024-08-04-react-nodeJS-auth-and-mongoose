@@ -1,0 +1,6 @@
+4 - left:35px
+5 - left:75px
+6 - left:102px
+7 - left:120px
+8 - left:135px
+9 - left:

@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/natalie/projects/bulls-and-cows/static/css/main.b6c72f1f.css",
+    "main.js": "/natalie/projects/bulls-and-cows/static/js/main.1ffcd3c8.js",
+    "static/media/woman-with-laptop-thinking.png": "/natalie/projects/bulls-and-cows/static/media/woman-with-laptop-thinking.c0eafe754fb5f443602e.png",
+    "static/media/user02.png": "/natalie/projects/bulls-and-cows/static/media/user02.a011a87fc2c7f0265bf6.png",
+    "static/media/logo-bull01.svg": "/natalie/projects/bulls-and-cows/static/media/logo-bull01.805cc64eb3776b329982775c97fcd196.svg",
+    "static/media/guy-orange.PNG": "/natalie/projects/bulls-and-cows/static/media/guy-orange.8d8f340bb0844372ac4e.PNG",
+    "static/media/top.jpg": "/natalie/projects/bulls-and-cows/static/media/top.3068d4525a995e609dfd.jpg",
+    "static/media/meat.jpg": "/natalie/projects/bulls-and-cows/static/media/meat.3a06829cca2801876b74.jpg",
+    "static/media/bottom.jpg": "/natalie/projects/bulls-and-cows/static/media/bottom.f7f968a332179e480bc9.jpg",
+    "static/media/tomato.jpg": "/natalie/projects/bulls-and-cows/static/media/tomato.12a497a6195464f751c9.jpg",
+    "index.html": "/natalie/projects/bulls-and-cows/index.html",
+    "main.b6c72f1f.css.map": "/natalie/projects/bulls-and-cows/static/css/main.b6c72f1f.css.map",
+    "main.1ffcd3c8.js.map": "/natalie/projects/bulls-and-cows/static/js/main.1ffcd3c8.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b6c72f1f.css",
+    "static/js/main.1ffcd3c8.js"
+  ]
+}

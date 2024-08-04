@@ -1,0 +1,33 @@
+https://randomuser.me/
+https://dummyjson.com/docs/todos
+https://dog.ceo/api/breeds/image/random
+https://www.boredapi.com/api/activity 
+https://api.genderize.io/?name=Moshe 
+https://en.wikipedia.org/w/api.php?action=parse&page=Pet_door&format=json
+https://jsonplaceholder.typicode.com/users/1
+https://rapidapi.com (needs account)
+https://unsplash.com/api.php?action=parse&page=
+https://api.govmap.gov.il/
+https://www.pexels.com/api/
+
+
+לחפש מאגרי מידע ממשלתיים:
+https://data.gov.il/dataset
+
+API דוגמאות
+
+רשימת ישובים - 5 תוצאות ראשונות
+https://data.gov.il/api/3/action/datastore_search?resource_id=5c78e9fa-c2e2-4771-93ff-7f400a12f7ba&limit=5
+
+אותו דבר, אבל שמות השדות - באנגלית
+https://data.gov.il/he/api/3/action/datastore_search?resource_id=8f714b6f-c35c-4b40-a0e7-547b675eee0e&limit=5
+
+https://data.gov.il/he/api/3/action/datastore_search?resource_id=8f714b6f-c35c-4b40-a0e7-547b675eee0e&limit=5&q=Ashdod
+
+https://data.gov.il/he/dataset/citiesandsettelments/resource/8f714b6f-c35c-4b40-a0e7-547b675eee0e
+
+רשימת רחובות - 5 תוצאות ראשונות
+https://data.gov.il/api/3/action/datastore_search?resource_id=bf185c7f-1a4e-4662-88c5-fa118a244bda&limit=5
+
+דוגמא לשאילתא (תוצאות שכוללות 'JONES'רשימת רחובות - 
+https://data.gov.il/api/3/action/datastore_search?resource_id=bf185c7f-1a4e-4662-88c5-fa118a244bda&q=jones

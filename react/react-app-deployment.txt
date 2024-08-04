@@ -1,0 +1,38 @@
+1. For example you'd like to upload the homework "Counters"
+
+2. So you create on the hosting directory panda/<your name>/projects/bulls-and-cows
+
+3. Now you go to your React app package.json and add there
+   the entry "homepage", like this:
+
+   {
+  "name": "counters",
+  "version": "0.1.0",
+  "homepage": "https://panda.knowledger.guru/natalie/projects/bulls-and-cows",
+
+4. If your app uses react router and starts not from the domain/subdomain
+
+   root, you should to add basename to the BrowserRouter.
+
+   Go to index.js and there add prop "basename" to BrowserRouter,
+
+   like this:
+
+   <BrowserRouter basename="/natalie/projects/bulls-and-cows">
+
+5. In the terminal:
+
+   $ cd react/bulls-and-cows
+
+   (if there is no node_modules, run "npm i")
+
+   $ npm run build
+
+6. Now you've got directory "build" 
+
+7. Use FTP client like Filezilla and copy the contents of
+   your local "build" dir to "bulls-and-cows" dir on the hosting
+
+8. Now check it in the browser at:
+
+https://panda.knowledger.guru/<your name>/projects/bulls-and-cowss

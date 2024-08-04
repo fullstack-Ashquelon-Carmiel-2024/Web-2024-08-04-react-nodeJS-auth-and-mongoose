@@ -1,0 +1,54 @@
+[{
+   "name":"taekwondo",
+   "isOlympic":true,
+   "isSummerOlympic":true,
+   "img":"taekwondo_pictogram.svg"
+},
+{
+   "name":"windsurfing",
+   "sailingClass":"IQFOIL",
+   "isSummerOlympic":true,
+   "isOlympic":true,
+   "img":"sailing-height-pictogram.svg"
+},
+{
+   "name":"Avishag Samberg",
+   "password":"abc123",
+   "email":"avishags@gmail.com",
+   "sport":"taekwondo",
+   "img":"avishag_samberg.webp",
+   "role":"moderator"
+},
+{
+   "name":"Inbar Lanir",
+   "password":"ab1234",
+   "email":"inbarl@gmail.com",
+   "sport":"judo",
+   "img":"inbar-lanir.avif",
+   "role":"admin"
+},
+{
+   "name":"Peter Palchik",
+   "password":"ab12345",
+   "email":"peterp@gmail.com",
+   "sport":"judo",
+   "img":"peter_palchik.webp",
+   "role":"moderator"
+},
+{
+   "name":"Sharon Cantor",
+   "password":"abc12345",
+   "email":"sharonc@gmail.com",
+   "sport":"windsurfing",
+   "img":"sharon-cantor.webp",
+   "role":"user"
+},
+{
+   "name":"Tom Reuveni",
+   "password":"abc2345",
+   "email":"tomr@gmail.com",
+   "sport":"windsurfing",
+   "img":"tom-reuveni.jpeg",
+   "role":"user"
+}
+]

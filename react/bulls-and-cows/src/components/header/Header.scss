@@ -1,0 +1,11 @@
+@use '../../_base.scss';
+
+.header {
+
+    color: var(--bs-cyan) !important;
+        text-shadow: base.$basic-text-shadow;
+        //text-shadow: var(--basic-text-shadow);
+
+
+
+}

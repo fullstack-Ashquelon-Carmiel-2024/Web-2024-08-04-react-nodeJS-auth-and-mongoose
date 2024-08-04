@@ -1,0 +1,65 @@
+.navbar {
+
+    .navbar-brand {
+        position: relative;
+        border: 5px solid var(--bs-info);
+        min-width: 9rem;
+        padding: 0;
+
+        .logo {
+            min-height: 6rem;
+        }
+
+        .logoText {
+            position: absolute;
+            top: 0;
+            left: 1px;
+        }
+
+
+    }
+
+    .nav-link {
+        font-size: calc(1.1rem + .6vw) !important;
+        padding: 0 1rem !important;
+        box-shadow: 1px 1px 1px 1px var(--bs-info),inset -1px -1px 2px 2px grey;
+
+        &:hover {
+            box-shadow: 1px 1px 2px 2px var(--bs-info),inset -1px -1px 2px 2px grey;
+        }
+    }
+
+    .profile-menu {
+
+        .profile-pic{
+            display: inline-block;
+            vertical-align: middle;
+             width: 50px;
+             height: 50px;
+             overflow: hidden;
+            border-radius: 50%;
+            
+            img{
+                width: 100%;
+                height: auto;
+                object-fit: cover;
+            }
+         }
+         
+         .dropdown-menu {
+           right: 0;
+           left: unset;
+         }
+
+         .fa-fw {
+           margin-right: 10px;
+         }
+         
+         .toggle-change::after {
+           border-top: 0;
+           border-bottom: 0.3em solid;
+         }
+    }
+
+
+}

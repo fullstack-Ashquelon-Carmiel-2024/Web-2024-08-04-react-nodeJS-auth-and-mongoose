@@ -1,0 +1,42 @@
+bcrypt is using "Blowfish" algorithm
+
+
+https://www.schneier.com/academic/blowfish/
+
+It is in use from 1990-ties. 
+The are not many reported issues, and no one has broken the Blowfish algorithm.
+
+Is in use by many programs, including different password "Wallets",
+and the main kernel of LINUX.
+
+It is using one-directional hash function:
+you encrypt the password and get some string,
+but you cannot reverse the function and get the password back.
+
+When you compare the suggested password to the stored password,
+you should hash the suggested password too, and only then you can compare.
+
+As algorithm slower as it less peneatrable. Blowfish is slow enough.
+
+To slow it down and to make the hash function unpredictable,
+we should use "saltRounds" number. Usually we set it to number 
+between 10 and 12 (including 🤣).
+
+Rainbow table attacks
+----------------------------------------------------------------
+From https://www.beyondidentity.com/glossary/rainbow-table-attack
+
+The rainbow table itself refers to a precomputed table that contains 
+the password hash value for each plain text character used during 
+the authentication process. If hackers gain access to the list of password hashes, 
+they can crack all passwords very quickly with a rainbow table.
+
+The prevalence of rainbow table attacks has dramatically decreased due 
+to a technique known as “salting.” Salting is a modern technique used 
+to thwart rainbow table attacks. It involves adding an extra random value 
+to every hashed password to create a different hash value. 
+Most modern password authentication systems include salting, 
+which has significantly lessened the number of successful rainbow table attacks.
+
+Though salting is more prevalent, some developers still don’t utilize it 
+and that puts them at increased risk of a rainbow table attack.

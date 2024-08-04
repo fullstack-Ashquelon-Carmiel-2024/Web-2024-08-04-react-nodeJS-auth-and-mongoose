@@ -1,0 +1,90 @@
+:root {
+    --disk-height: 20px;
+    --font-size: 1.5rem;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+}
+
+button, input {
+    padding: 0.5rem;
+    margin: 1rem;
+    font-size: var(--font-size);
+}
+
+button {
+    cursor: pointer;
+}
+
+main {
+    position: relative; /* for moving the disks */
+    display: flex; /* for placing the towers */
+    border: 1px solid blue;
+    flex-basis: 800px;
+    flex-grow: 1;
+}
+
+.input-and-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: var(--font-size);
+}
+
+.tower {
+    width: 250px;
+    height: 600px;
+    background: antiquewhite;
+    margin: 10px;
+}
+
+.tower.clicked {
+    border: 1px solid green;
+}
+
+.tower-pole {
+    background: darkblue;
+    height: 500px;
+    width: 20px;
+    position: relative;
+    top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.tower-base {
+    background: darkblue;
+    height: var(--disk-height);
+    width: 200px;
+    position: relative;
+    top: 80px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.disk {
+    height: var(--disk-height);
+    position: absolute;
+}
+
+.purple {
+    width: 100px;
+    background: rebeccapurple;
+    bottom: 30px;
+    left: calc(10px + 250px / 2 - 100px / 2);
+}
+
+.red {
+    width: 80px;
+    background: orangered;
+    bottom: 50px;
+    left: calc(10px + 250px / 2 - 80px / 2);
+}
+

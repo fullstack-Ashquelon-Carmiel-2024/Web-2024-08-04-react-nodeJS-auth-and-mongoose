@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+    <title>Promises, promises</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="container">
+
+    <header>
+        <h1>We love promises! Right? Promise?</h1>
+        <nav class="navbar navbar-expand-md navbar-light bg-light">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToToggle" aria-controls="navbarToToggle" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+            <div class="collapse navbar-collapse" id="navbarToToggle">
+
+                <ul  class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item active"><a class="nav-link" href="#first-try">First Try</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#callback-to-promise">Callback to Promise</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <section id="dogs">
+        <h3 class="bg-info text-light p-2">Dogs</h3>
+        <!-- <label for="inp-movie">Enter movie search string (only whole words,<br>
+            like "alone" or "home alone"):</label>
+            <input type="text" id="inp-movie"> -->
+            <button id="btn-random-dog">Get Random Dog Picture</button>
+            <div class="card">
+                <img src="" alt="" class="img-fluid">
+                <div class="card-body">
+                    <h5 class="card-title dog-breed"></h5>
+           
+                </div>
+            </div>
+            <p class="API">
+                https://dog.ceo/api/breeds/image/random
+            </p>
+            <div class="result"></div>
+    </section>
+    <section id="first-try">
+        <h3 class="bg-info text-light p-2">First Try</h3>
+        <label for="inp-movie">Enter movie search string (only whole words,<br>
+            like "alone" or "home alone"):</label>
+            <input type="text" id="inp-movie">
+            <button id="btn-movie">Get Movies</button>
+            <p class="API">
+                https://movie-database-alternative.p.rapidapi.com/?s=Avengers&r=json&y=2000&page=1
+            </p>
+            <div class="result"></div>
+    </section>
+    <section id="callback-to-promise">
+        <h3 class="bg-info text-light p-2">Callback to Promise</h3>
+        <label for="inp-movie">Enter movie search string (only whole words,<br>
+            like "alone" or "home alone"):</label>
+            <input type="text" id="inp-movie">
+            <button id="btn-movie">Get Movies</button>
+            <p class="API">
+                https://movie-database-alternative.p.rapidapi.com/?s=Avengers&r=json&y=2000&page=1
+            </p>
+            <div class="result"></div>
+    </section>
+    </div> <!-- page container -->
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script src="./headers.js"></script>
+    <script src="./script.js"></script>
+</body>
+</html>

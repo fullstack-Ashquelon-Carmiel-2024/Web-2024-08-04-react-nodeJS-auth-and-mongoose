@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- JavaScript queueMicrotask() function -->
+<div id="progress"></div>
+
+<script>
+    const progress = document.getElementById("progress");
+    let i;
+    //Queue a microtask to update the progress bar
+    function func01() {
+        //Update the progress
+        console.log(`So, I am microtask`)
+        i = 0;
+        let interval = setInterval(() => {
+            progress.innerHTML = i;
+            i++;
+            if (i > 100) {
+                clearInterval(interval);
+            }
+        }, 100);
+    }
+    console.log(`before queueMicrotask`);
+    setTimeout(() => {
+        console.log(`My timeout has finished at ${i}`)
+    })
+     window.queueMicrotask(func01); 
+     /* Promise.resolve().then(() => func01()); */ 
+    /* process.nextTick(func01); - in NodeJS */
+    console.log(`after queueMicrotask`);
+    //queueMicrotask() is a function that runs after the current task
+</script>
+</body>
+</html>

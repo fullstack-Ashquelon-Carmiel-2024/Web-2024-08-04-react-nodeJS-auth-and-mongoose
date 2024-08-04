@@ -1,0 +1,13 @@
+@use '../../_base.scss';
+
+.userList {
+
+    button {
+        box-shadow: var(--basic-box-shadow);
+
+        a {
+            text-shadow: base.$basic-text-shadow;
+        }
+    }
+
+}

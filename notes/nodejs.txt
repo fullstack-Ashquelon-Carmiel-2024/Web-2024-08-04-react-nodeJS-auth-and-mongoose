@@ -1,0 +1,15 @@
+To Update to the Newest Versions of the Packages But Under the Constriant of package.json
+----------------------
+$ npm update
+
+To Update to the Newest Versions of the Packages But Without the Constriant of package.json
+----------------------
+$ npm i -g npm-check-updates
+
+Run npm-check-updates to update all version numbers in your 
+package.json to the latest versions:
+
+$ ncu -u
+
+$ npm i
+

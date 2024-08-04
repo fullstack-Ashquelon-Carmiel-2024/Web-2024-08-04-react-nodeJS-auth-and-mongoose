@@ -1,0 +1,1677 @@
+1. copy some basic react app to "bulls-and-cows"
+   or
+   $ npx create-react-app bulls-and-cows
+
+2. 
+$ npm i bootstrap sass
+
+3. index.css:
+
+body {
+  background: rgb(118, 143, 189);
+}
+
+4. src/components/header/Header.scss
+   src/components/header/Header.jsx:
+
+   Use snippet 'rfce' and after that change to
+
+   import './Header.scss';
+
+function Header({title}) {
+  return (
+    <h1 className="display-1 text-primary text-center">
+        {title}
+    </h1>
+  )
+}
+
+export default Header
+
+5. Import it into App and see that the classes 
+of Bootstrap work:
+
+import Header from './components/header/Header';
+
+function App() {
+  // MISSION: convert "users" into "state" and make
+  // this array to be their initial value
+
+  const users = [
+    { id: 77, fullName: 'Harleen Frances Quinzel', nick: 'Harley Quinn',
+      email:'harley@gmail.com', phone: '555-5555', gender: 'f',role:'player'},
+    { id: 121, fullName: 'Joakin Phoenix', nick: 'Joker',
+      email:'joker@gmail.com',  gender: 'm',role:'player'},
+    { id: 123, fullName: 'Bruce Wayne', nick: 'Batman',
+      email:'bat@gmail.com', phone: '555-5557',role:'player'},
+    { id: 111, fullName: 'Princess Diana of Thymiscira', nick: 'Wonder Woman',
+        email:'gal.gadot@gmail.com', phone: '555-5558', role:'admin'}
+  ];
+
+  return (
+    <div className="App">
+      <Header title='User List' /> 
+    </div>
+  );
+}
+
+export default App;
+
+6. import { useState } from 'react';
+
+import Header from './components/header/Header';
+
+
+function App() {
+  // MISSION: convert "users" into "state" and make
+  // this array to be their initial value
+  const [users,setUsers] = useState(
+      [
+        { id: 77, fullName: 'Harleen Frances Quinzel', nick: 'Harley Quinn',
+          email:'harley@gmail.com', phone: '555-5555', gender: 'f',role:'player'},
+        { id: 121, fullName: 'Joakin Phoenix', nick: 'Joker',
+          email:'joker@gmail.com',  gender: 'm',role:'player'},
+        { id: 123, fullName: 'Bruce Wayne', nick: 'Batman',
+          email:'bat@gmail.com', phone: '555-5557',role:'player'},
+        { id: 111, fullName: 'Princess Diana of Thymiscira', nick: 'Wonder Woman',
+            email:'gal.gadot@gmail.com', phone: '555-5558', role:'admin'}
+      ]);
+
+  return (
+    <div className="App">
+      <Header title='User List' /> 
+    </div>
+  );
+}
+
+export default App;
+
+7. Create src/components/userList/UserList.scss
+7. Create src/components/userList/UserList.jsx:
+
+   (use snippet 'rfc')
+
+   import './UserList.scss';
+import UserCard from '../userCard/UserCard';
+
+export default function UserList({users}) {
+  return (
+    // col-12 - 12 columns for the narowest screen (xs - extra small)
+    // col-sm-6 - starting from the small screen - take the half of bootstrap
+    <div className="col-12 col-sm-6 col-md-7">
+        <ul>
+{/* MISSION: create expression that if there are some users,
+creates "map" of <UserCard user={user} /> for each user,
+and if not, shows 
+<p className="display-5">This is a sociopatic game: no users</p>
+*/}
+        </ul>
+    </div>
+  )
+}
+
+8. MISSION ACCOMPLISHED in UserList.jsx:
+
+import './UserList.scss';
+import UserCard from '../userCard/UserCard';
+
+export default function UserList({users}) {
+  return (
+    // col-12 - 12 columns for the narowest screen (xs - extra small)
+    // col-sm-6 - starting from the small screen - take the half of bootstrap
+    <div className="col-12 col-sm-6 col-md-7">
+        <ul>
+{/* MISSION: create expression that if there are some users,
+creates "map" of <UserCard user={user} /> for each user,
+and if not, shows 
+<p className="display-5">This is a sociopatic game: no users</p>
+*/}
+            {users.length > 0 ?
+                users.map(user => 
+                    <UserCard key={user.id} user={user} />):
+                    <p className="display-5">
+                        This is a sociopatic game: no users</p>
+            }
+
+        </ul>
+    </div>
+  )
+}
+
+
+9. src/components/userCard/UserCard.scss
+9. src/components/userCard/UserCard.jsx
+
+import './UserCard.scss';
+import femaleImg from '../../images/woman-with-laptop-thinking.png';
+import maleImg from '../../images/guy-orange.PNG';
+import justUserImg from '../../images/user02.png';
+
+export default function UserCard({user}) {
+
+  const { fullName, email, role } = user;
+
+  let imgSrc = !user.gender ? justUserImg : user.gender === 'f' 
+                            ? femaleImg : maleImg;
+
+  return (
+    <li className="card mb-2">
+
+        <div className="row">
+
+            <div className="col-4">
+                <img src={imgSrc} className="img-fluid rounded-start" alt="" />
+            </div>
+            <div className="col-7 card-body">
+                <h5 className="card-title">{fullName}</h5>
+                <p className="card-text">Email: {email}</p>
+                <p className="card-text"><small className="text-muted">
+                    Role: {role}
+                </small></p>
+            </div>
+            <div className="col-1">
+
+            </div>
+
+        </div>
+
+    </li>
+  )
+}
+
+
+10. Add UserList to App:
+
+import { useState } from 'react';
+
+import Header from './components/header/Header';
+import UserList from './components/userList/UserList';
+
+
+function App() {
+  // MISSION: convert "users" into "state" and make
+  // this array to be their initial value
+  const [users,setUsers] = useState(
+      [
+        { id: 77, fullName: 'Harleen Frances Quinzel', nick: 'Harley Quinn',
+          email:'harley@gmail.com', phone: '555-5555', gender: 'f',role:'player'},
+        { id: 121, fullName: 'Joakin Phoenix', nick: 'Joker',
+          email:'joker@gmail.com',  gender: 'm',role:'player'},
+        { id: 123, fullName: 'Bruce Wayne', nick: 'Batman',
+          email:'bat@gmail.com', phone: '555-5557',role:'player'},
+        { id: 111, fullName: 'Princess Diana of Thymiscira', nick: 'Wonder Woman',
+            email:'gal.gadot@gmail.com', phone: '555-5558', role:'admin'}
+      ]);
+
+  return (
+    <div className="App">
+      <Header title='User List' /> 
+      <UserList users={users} />
+    </div>
+  );
+}
+
+export default App;
+
+
+11. Create AddUser form:
+
+src/components/addUser/AddUser.scss
+src/components/addUser/AddUser.jsx:
+
+import './AddUser.scss';
+
+export default function AddUser() {
+
+    return (
+      <div className="col-12 col-sm-6 col-md-5 border-start border-start-1 border-primary px-5 addUser order-0 order-sm-1">
+          
+          {/* noValidate - removes original HTML validation, 
+              pay attention that here in React it is written noValidate
+              and not novalidate as in plain HTML */}
+          <form className="fs-3"  noValidate >
+          
+            <div className="form-group row">
+                <div className="opacity-0 text-danger" >
+                    The Name or the Nick already exists!
+                </div>
+            </div>
+            <div className="form-group row mb-2">
+              <label className="col-form-label col-12 col-lg-3" htmlFor="fullName">Name:</label>
+              <div className="col-12 offset-0 col-lg-8 offset-lg-1">
+
+                  <input className="form-control fs-3" type="text" name="fullName" id="fullName" 
+                        required />
+
+
+                  <div className="invalid-feedback">You should enter a full name!</div>
+              </div>
+            
+            </div>
+            <div className="form-group row mb-2">
+              <label className="col-form-label col-12 col-lg-3" htmlFor="email">Email:</label>
+              <div className="col-12 col-lg-8 offset-lg-1">
+
+                  <input className="form-control fs-3" type="email" name="email" id="email" 
+                           required                    />
+
+                  <div className="invalid-feedback">You should enter a valid email!</div>
+              </div>
+            </div>
+            
+            <div className="form-group row mb-2">
+              <label className="col-form-label col-12 col-lg-3" htmlFor="nick">Nick:</label>
+              <div className="col-12 col-lg-8 offset-lg-1" >
+
+                  <input className="form-control fs-3" type="text" name="nick" id="nick"
+                           required />
+                  <div className="invalid-feedback">You should supply a nickname!</div>
+
+              </div>
+            </div>
+            <div className="form-group row mb-2">
+              <label className="col-form-label col-12 col-lg-3" htmlFor="phone">Phone:</label>
+              <div className="col-12 col-lg-8 offset-lg-1">
+
+                  <input className="form-control fs-2" type="tel" name="phone" id="phone"
+                          />
+
+              </div>
+            </div>
+            <div className="form-group row">
+              <label className="col-form-label col-12 col-lg-3" htmlFor="gender">Gender:</label>
+              <div className="col-12 col-lg-8 offset-lg-1">
+
+                  <select className="form-control fs-4" name="gender" id="gender"
+                            >
+                    <option value="">-- Choose gender --</option>
+                    <option value="f">Female</option>
+                    <option value="m">Male</option>
+                    <option value="">Not telling ya</option>
+                  </select>
+              </div>
+            </div>
+            <div className="form-group row">
+              <label className="col-form-label col-12 col-lg-3" htmlFor="role">Role:</label>
+              <div className="col-12 col-lg-8 offset-lg-1">
+
+                  <select className="form-control fs-4" name="role" id="role" required
+                            >
+                    <option value="">-- Choose role --</option>
+                    <option value="admin">Admin</option>
+                    <option value="player">Player</option>
+
+                  </select>
+              </div>
+            </div>
+            <div className="d-grid">
+
+                <button 
+                    className="btn btn-outline-info btn-lg fs-1 px-5 mt-4 shadow">
+                            Add</button>
+            </div>
+          </form>
+      </div>
+    )
+  }
+
+  12. Use React "composition" inside App.jsx:
+
+  import { useState } from 'react';
+
+import AddUser from './components/addUser/AddUser';
+import Header from './components/header/Header';
+import UserList from './components/userList/UserList';
+
+
+function App() {
+  // MISSION: convert "users" into "state" and make
+  // this array to be their initial value
+  const [users,setUsers] = useState(
+      [
+        { id: 77, fullName: 'Harleen Frances Quinzel', nick: 'Harley Quinn',
+          email:'harley@gmail.com', phone: '555-5555', gender: 'f',role:'player'},
+        { id: 121, fullName: 'Joakin Phoenix', nick: 'Joker',
+          email:'joker@gmail.com',  gender: 'm',role:'player'},
+        { id: 123, fullName: 'Bruce Wayne', nick: 'Batman',
+          email:'bat@gmail.com', phone: '555-5557',role:'player'},
+        { id: 111, fullName: 'Princess Diana of Thymiscira', nick: 'Wonder Woman',
+            email:'gal.gadot@gmail.com', phone: '555-5558', role:'admin'}
+      ]);
+
+  return (
+    <div className="App">
+      <UserList users={users}>
+        <Header title='User List' /> 
+      </UserList>
+      
+      <AddUser>
+        <Header title='Add User' /> 
+      </AddUser>
+    </div>
+  );
+}
+
+export default App;
+
+13. Make UserList to use children:
+
+import './UserList.scss';
+import UserCard from '../userCard/UserCard';
+
+export default function UserList({users, children}) {
+  return (
+    // col-12 - 12 columns for the narowest screen (xs - extra small)
+    // col-sm-6 - starting from the small screen - take the half of bootstrap
+    <div className="col-12 col-sm-6 col-md-7">
+        {children}
+        <ul>
+
+14. Make AddUser to use children:
+
+import './AddUser.scss';
+
+export default function AddUser({children}) {
+
+    return (
+      <div className="col-12 col-sm-6 col-md-5 border-start border-start-1 border-primary px-5 addUser order-0 order-sm-1">
+          
+        {children}
+
+          {/* noValidate - removes original HTML validation, 
+              pay attention that here in React it is written noValidate
+              and not novalidate as in plain HTML */}
+          <form className="fs-3"  noValidate >
+
+15. Use composition with the children in App.jsx,
+and add "container" and "row" to make Bootstrap work:
+
+import { useState } from 'react';
+
+import AddUser from './components/addUser/AddUser';
+import Header from './components/header/Header';
+import UserList from './components/userList/UserList';
+
+
+function App() {
+  // MISSION: convert "users" into "state" and make
+  // this array to be their initial value
+  const [users,setUsers] = useState(
+      [
+        { id: 77, fullName: 'Harleen Frances Quinzel', nick: 'Harley Quinn',
+          email:'harley@gmail.com', phone: '555-5555', gender: 'f',role:'player'},
+        { id: 121, fullName: 'Joakin Phoenix', nick: 'Joker',
+          email:'joker@gmail.com',  gender: 'm',role:'player'},
+        { id: 123, fullName: 'Bruce Wayne', nick: 'Batman',
+          email:'bat@gmail.com', phone: '555-5557',role:'player'},
+        { id: 111, fullName: 'Princess Diana of Thymiscira', nick: 'Wonder Woman',
+            email:'gal.gadot@gmail.com', phone: '555-5558', role:'admin'}
+      ]);
+
+  return (
+    <div className="App container">
+      <div className="appTitle">Bulls and Cows</div>
+      <div className="row">
+
+        <UserList users={users}>
+          <Header title='User List' /> 
+        </UserList>
+
+        <AddUser>
+          <Header title='Add User' /> 
+        </AddUser>
+        
+      </div>
+    </div>
+  );
+}
+
+export default App;
+
+16. Change margin in the container and the gaps in the row in App:
+
+import { useState } from 'react';
+
+import AddUser from './components/addUser/AddUser';
+import Header from './components/header/Header';
+import UserList from './components/userList/UserList';
+
+
+function App() {
+  // MISSION: convert "users" into "state" and make
+  // this array to be their initial value
+  const [users,setUsers] = useState(
+      [
+        { id: 77, fullName: 'Harleen Frances Quinzel', nick: 'Harley Quinn',
+          email:'harley@gmail.com', phone: '555-5555', gender: 'f',role:'player'},
+        { id: 121, fullName: 'Joakin Phoenix', nick: 'Joker',
+          email:'joker@gmail.com',  gender: 'm',role:'player'},
+        { id: 123, fullName: 'Bruce Wayne', nick: 'Batman',
+          email:'bat@gmail.com', phone: '555-5557',role:'player'},
+        { id: 111, fullName: 'Princess Diana of Thymiscira', nick: 'Wonder Woman',
+            email:'gal.gadot@gmail.com', phone: '555-5558', role:'admin'}
+      ]);
+
+  return (
+    <div className="App container pb-5">
+      <div className="appTitle">Bulls and Cows</div>
+      <div className="row gx-0 gy-3">
+
+        <UserList users={users}>
+          <Header title='User List' /> 
+        </UserList>
+
+        <AddUser>
+          <Header title='Add User' /> 
+        </AddUser>
+
+      </div>
+    </div>
+  );
+}
+
+export default App;
+
+17. In AddUser, make it first (above)
+    in the narrowest screen, and the second (on the right)
+    in the other screens: 
+
+    import './AddUser.scss';
+
+export default function AddUser({children}) {
+
+    return (
+      <div className="col-12 col-sm-6 col-md-5 col-lg-5 offset-lg-1 border-start border-start-1 border-primary px-5 addUser order-0 order-sm-1">
+          
+        {children}
+
+
+18. In UserList, make it second (below)
+    in the narrowest screen, and the first (on the left)
+    in the other screens,
+    also removed the padding of <ul>:
+
+      return (
+    // col-12 - 12 columns for the narowest screen (xs - extra small)
+    // col-sm-6 - starting from the small screen - take the half of bootstrap
+    <div className="col-12 col-sm-6 col-md-7 col-lg-6 order-1 order-sm-0">
+        {children}
+        <ul className="p-0">
+
+19. Install packages for the Font Awesome icons :
+
+npm i 
+
+@fortawesome/fontawesome-svg-core
+
+@fortawesome/free-brands-svg-icons
+@fortawesome/free-regular-svg-icons
+@fortawesome/free-solid-svg-icons
+
+@fortawesome/react-fontawesome@latest
+
+@fortawesome/fontawesome-free
+
+20. Sο, the best 3 methods of using Font Awesome now:
+
+    a) If we need just a few icons here and there once in a progam
+       
+       Import into the specific component the object of FontAwesomeIcon:
+       import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+
+       In the same component import the specific icon objects, like:
+
+       import { faCoffee, faTrashCan as faSolidTrashCan } 
+                 from '@fortawesome/free-solid-svg-icons';
+      import { faReact } from '@fortawesome/free-brands-svg-icons';
+
+     And now we use it:
+
+        <FontAwesomeIcon icon={faTrashCan} 
+                  className="text-danger" role='button' />
+                <FontAwesomeIcon icon={faCoffee} 
+                  className="text-warning" role='button' />
+                <FontAwesomeIcon icon={faSolidTrashCan} 
+                  className="text-info" role='button' />
+
+      b) If we need some icons for the use through the several components
+         in the program. We can create one common file like:
+
+         assets/icons/projectIcons.js:
+
+        import {faTrashCan} from '@fortawesome/free-regular-svg-icons';
+        import {faCow} from '@fortawesome/free-solid-svg-icons';
+
+         import { library} from '@fortawesome/fontawesome-svg-core';
+
+         library.add(faCow,faTrashCan);
+
+         Import the file into index.js:
+
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './assets/icons/projectIcons';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import './index.css';
+import App from './App';
+
+         Import into the specific component the object of FontAwesomeIcon:
+       import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+
+          And use it with the class names:
+          <FontAwesomeIcon icon="fa-regular fa-trash-can" 
+                  className="text-danger" role='button' />
+
+c) When we need a lot of icons
+
+We can create one common file like:
+
+         assets/icons/projectIcons.js:
+
+          Import one or more icon sets:
+
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { far } from '@fortawesome/free-regular-svg-icons';
+import { fab } from '@fortawesome/free-brands-svg-icons';
+import { library} from '@fortawesome/fontawesome-svg-core';
+library.add(far,fas,fab)
+
+Import the file into index.js:
+
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './assets/icons/projectIcons';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import './index.css';
+import App from './App';
+
+Import into the specific component the object of FontAwesomeIcon:
+       import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+
+
+
+And use it with the class names:
+
+<FontAwesomeIcon icon="fa-regular fa-trash-can" 
+                  className="text-danger" role='button' />
+
+21. Move images dir into the "assets" dir and
+perform the change in UserCard:
+
+import './UserCard.scss';
+import femaleImg from '../../assets/images/woman-with-laptop-thinking.png';
+import maleImg from '../../assets/images/guy-orange.PNG';
+import justUserImg from '../../assets/images/user02.png';
+
+
+22. Styling Icons:
+
+https://docs.fontawesome.com/web/style/rotate
+
+23. Now we add the cow icon to the Header component and 
+
+it looks like this:
+
+import './Header.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+function Header({title}) {
+  return (
+    <h1 className="display-1 text-primary text-center">
+        <FontAwesomeIcon icon="fa-solid fa-cow"
+                      />
+        {' '+title+' '}
+        <FontAwesomeIcon icon="fa-solid fa-cow"
+             className='fa-flip-horizontal' />
+    </h1>
+  )
+}
+
+export default Header
+
+24. And we add "trash-can" to the UserCard componet, and it looks like
+this:
+
+import './UserCard.scss';
+import femaleImg from '../../assets/images/woman-with-laptop-thinking.png';
+import maleImg from '../../assets/images/guy-orange.PNG';
+import justUserImg from '../../assets/images/user02.png';
+
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+
+export default function UserCard({user}) {
+
+    const { fullName, email, role, id } = user;
+
+  let imgSrc = !user.gender ? justUserImg : user.gender === 'f' 
+                            ? femaleImg : maleImg;
+
+  return (
+    <li className="card mb-2">
+
+        <div className="row">
+
+            <div className="col-4">
+                <img src={imgSrc} className="img-fluid rounded-start" alt="" />
+            </div>
+            <div className="col-6 card-body">
+                <h5 className="card-title">{fullName}</h5>
+                <p className="card-text">Email: {email}</p>
+                <p className="card-text"><small className="text-muted">
+                    Role: {role}
+                </small></p>
+            </div>
+            <div className="col-2 d-flex justify-content-center align-items-center">
+
+                <FontAwesomeIcon icon="fa-regular fa-trash-can" 
+                  className="text-danger fs-1" role='button' />
+                
+            </div>
+
+        </div>
+
+    </li>
+  )
+}
+
+25. We'll use Font Awesome animation for the "mouseEnter" event 
+ 
+over the trash icon (in UserCard component):
+
+            <div className="col-2 d-flex justify-content-center align-items-center">
+
+                <FontAwesomeIcon icon="fa-regular fa-trash-can" 
+                  className="text-danger fs-1" role='button'
+                    onMouseEnter={(e) => {
+                        e.target.classList.add('fa-shake');
+                        setTimeout(()=>{
+                            e.target.classList.remove('fa-shake');
+                        },1000)
+                    }}
+                />
+                
+            </div>
+
+26. Now we need to prepare "remove" function in App and we'll be able to
+
+use it at UserCard, using Context:
+
+So, in App:
+
+function App() {
+  // data inside localStorage is kept as a string
+  const [users,setUsers] = useState([
+        { id: 77, fullName: 'Harleen Frances Quinzel', nick: 'Harley Quinn',
+          email:'harley@gmail.com', phone: '555-5555', gender: 'f',role:'player'},
+        { id: 121, fullName: 'Joakin Phoenix', nick: 'Joker',
+          email:'joker@gmail.com',  gender: 'm',role:'player'},
+        { id: 123, fullName: 'Bruce Wayne', nick: 'Batman',
+          email:'bat@gmail.com', phone: '555-5557',role:'player'},
+        { id: 111, fullName: 'Princess Diana of Thymiscira', nick: 'Wonder Woman',
+            email:'gal.gadot@gmail.com', phone: '555-5558', role:'admin'}
+      ]);
+
+  const removeUser = (id) => {
+
+    setUsers(users.filter(user => user.id !== id));
+
+  }
+
+27. To pass removeUser() to UserCard we will need to pass it first to UserList and
+
+after that - to UserCard, so we'll prefer to use here CONTEXT.
+
+src/contexts/userContext.js:
+
+import React from 'react';
+
+const UserContext = React.createContext();
+
+export default UserContext;
+
+28. In App we import the context:
+
+import { useState } from 'react';
+
+import AddUser from './components/addUser/AddUser';
+import Header from './components/header/Header';
+import UserList from './components/userList/UserList';
+
+import UserContext from './contexts/userContext';
+
+29. We envelope the whole App by this Context and pass to it "removeUser"
+
+function:
+
+  return (
+    <UserContext.Provider value={{removeUser}}>
+    <div className="App container pb-5">
+
+      <div className="appTitle">Bulls and Cows</div>
+      <div className="row gx-0 gy-3">
+        
+        <UserList users={users}>
+          <Header title='User List' /> 
+        </UserList>
+
+        <AddUser>
+          <Header title='Add User' /> 
+        </AddUser>
+                                          
+      </div>
+    </div>
+    </UserContext.Provider>
+  );
+
+30. In UserCard we import useContext and userContext,
+
+and get removeUser function from userContext.
+
+import './UserCard.scss';
+import femaleImg from '../../assets/images/woman-with-laptop-thinking.png';
+import maleImg from '../../assets/images/guy-orange.PNG';
+import justUserImg from '../../assets/images/user02.png';
+
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+
+import { useContext} from 'react';
+import UserContext from '../../contexts/userContext';
+
+export default function UserCard({user}) {
+
+    const { fullName, email, role, id } = user;
+    const { removeUser } = useContext(UserContext);
+
+31. In UserCard we add FontAwesome animation onClick of the "delete" button
+
+stop it after a while and use removeUser() function.
+
+            <div className="col-2 d-flex justify-content-center align-items-center">
+
+                <FontAwesomeIcon icon="fa-regular fa-trash-can" 
+                  className="text-danger fs-1" role='button'
+                    onMouseEnter={(e) => {
+                        e.target.classList.add('fa-shake');
+                        setTimeout(()=>{
+                            e.target.classList.remove('fa-shake');
+                        },1000)
+                    }}  
+
+                    onClick={(e) => {
+                        e.target.classList.add('fa-flip');
+                        setTimeout(()=>{
+                            removeUser(id);
+                        },1500)
+                    }}
+                />
+                
+            </div>
+
+32. In App we create AddUser function, we'll pass it as a usual
+
+prop to AddUser component:
+
+  const addUser = (newUser) => {
+
+    setUsers(users.concat({...newUser, id: Date.now()}));
+    // Date.now() could still be the same, if addUser() runs in a loop 
+  }
+
+  return (
+    <UserContext.Provider value={{removeUser}}>
+    <div className="App container pb-5">
+
+      <div className="appTitle">Bulls and Cows</div>
+      <div className="row gx-0 gy-3">
+
+        <UserList users={users}>
+          <Header title='User List' /> 
+        </UserList>} />
+
+        <AddUser add={addUser}>
+          <Header title='Add User' /> 
+        </AddUser>
+                            
+33. Using Date.now() for unique id is OK in the situation like this,
+
+when we don't need to create many id automatically, but create one in 
+
+a while using our human speed.
+
+If it would run in a loop, we would get the error of some duplicate id-s,
+
+as in a loop it runs with computer speed, so it could happen that the next 
+
+id is being created in the previous millisecond, when the previous id was created.
+
+So we'll use a special package uuid for our unique id's from now.
+
+Install it:
+
+$ cd bulls-and-cows
+
+$ npm i uuid
+
+34. Import uuid into App (we use specific function - v4 - 
+   
+   from there, but we still name it "uuid", for the case that 
+   
+   we'll change the function we use, but the only change we'll
+   
+   need in that case will be here in the import):
+
+import { useState } from 'react';
+import { v4 as uuid } from 'uuid';
+
+35. Use uuid function in addUser function:
+
+  const addUser = (newUser) => {
+
+    /* setUsers(users.concat({...newUser, id: Date.now()})); */
+    // Date.now() could still be the same, if addUser() runs in a loop 
+     
+    setUsers(users.concat({...newUser, id: uuid()}));
+
+  }
+
+36. In AddUser component we create state for the formData
+
+and make each component to be a "controlled component" with the
+
+value={formData....} and onChange={...}:
+
+export default function AddUser({children}) {
+
+  const [formData,setFormData] = useState({});
+
+  const handleChange = e => setFormData({...formData,
+                                   [e.target.name]: e.target.value});
+  console.log(formData)
+
+    return (
+      <div className="col-12 col-sm-6 col-md-5 col-lg-5 offset-lg-1 border-start border-start-1 border-primary px-5 addUser order-0 order-sm-1">
+          
+        {children}
+
+          {/* noValidate - removes original HTML validation, 
+              pay attention that here in React it is written noValidate
+              and not novalidate as in plain HTML */}
+          <form className="fs-3" >
+          
+            <div className="form-group row">
+                <div className="opacity-0 text-danger" >
+                    The Name or the Nick already exists!
+                </div>
+            </div>
+            <div className="form-group row mb-2">
+              <label className="col-form-label col-12 col-lg-3" htmlFor="fullName">Name:</label>
+              <div className="col-12 offset-0 col-lg-8 offset-lg-1">
+
+                  <input className="form-control fs-3" type="text" name="fullName" id="fullName" 
+                        required onChange={handleChange} value={formData.fullName}  />
+
+
+                  <div className="invalid-feedback">You should enter a full name!</div>
+              </div>
+            
+            </div>
+            <div className="form-group row mb-2">
+              <label className="col-form-label col-12 col-lg-3" htmlFor="email">Email:</label>
+              <div className="col-12 col-lg-8 offset-lg-1">
+
+                  <input className="form-control fs-3" type="email" name="email" id="email" 
+                           required   onChange={handleChange}     value={formData.email} />
+
+                  <div className="invalid-feedback">You should enter a valid email!</div>
+              </div>
+            </div>
+            
+            <div className="form-group row mb-2">
+              <label className="col-form-label col-12 col-lg-3" htmlFor="nick">Nick:</label>
+              <div className="col-12 col-lg-8 offset-lg-1" >
+
+                  <input className="form-control fs-3" type="text" name="nick" id="nick"
+                           required  onChange={handleChange}  value={formData.nick} />
+                  <div className="invalid-feedback">You should supply a nickname!</div>
+
+              </div>
+            </div>
+            <div className="form-group row mb-2">
+              <label className="col-form-label col-12 col-lg-3" htmlFor="phone">Phone:</label>
+              <div className="col-12 col-lg-8 offset-lg-1">
+
+                  <input className="form-control fs-2" type="tel" name="phone" id="phone"
+                          onChange={handleChange}  value={formData.phone} />
+
+              </div>
+            </div>
+            <div className="form-group row">
+              <label className="col-form-label col-12 col-lg-3" htmlFor="gender">Gender:</label>
+              <div className="col-12 col-lg-8 offset-lg-1">
+
+                  <select className="form-control fs-4" name="gender" id="gender"
+                             onChange={handleChange}  value={formData.gender}>
+                    <option value="">-- Choose gender --</option>
+                    <option value="f">Female</option>
+                    <option value="m">Male</option>
+                    <option value="">Not telling ya</option>
+                  </select>
+              </div>
+            </div>
+            <div className="form-group row">
+              <label className="col-form-label col-12 col-lg-3" htmlFor="role">Role:</label>
+              <div className="col-12 col-lg-8 offset-lg-1">
+
+                  <select className="form-control fs-4" name="role" id="role" required
+                           onChange={handleChange}  value={formData.role} >
+                    <option value="">-- Choose role --</option>
+                    <option value="admin">Admin</option>
+                    <option value="player">Player</option>
+
+                  </select>
+              </div>
+            </div>
+            <div className="d-grid">
+
+                <button 
+                    className="btn btn-outline-info btn-lg fs-1 px-5 mt-4 shadow">
+                            Add</button>
+            </div>
+          </form>
+      </div>
+    )
+  }
+
+37. In AddUser component we get the prop of the add() function and
+
+use it in onSubmit function for the form onSubmit event.
+
+export default function AddUser({children, add}) {
+
+  const [formData,setFormData] = useState({});
+
+  const handleChange = e => setFormData({...formData,
+                                   [e.target.name]: e.target.value});
+
+  function onSubmit(e) {
+
+    e.preventDefault();
+
+    add(formData);
+    setFormData({});
+
+  }
+
+    console.log(formData)
+
+    return (
+      <div className="col-12 col-sm-6 col-md-5 col-lg-5 offset-lg-1 border-start border-start-1 border-primary px-5 addUser order-0 order-sm-1">
+          
+        {children}
+
+          {/* noValidate - removes original HTML validation, 
+              pay attention that here in React it is written noValidate
+              and not novalidate as in plain HTML */}
+          <form className="fs-3" onSubmit={onSubmit} >
+          
+38. Now we see that the validity of the form is checked by the initial functionality of
+
+<form> html tag, but if we enter some not totally valid data like email superman@lala
+
+it is still accepted.
+
+So we add pattern to the "email" input field:
+
+<div className="form-group row mb-2">
+  <label className="col-form-label col-12 col-lg-3" htmlFor="email">Email:</label>
+  <div className="col-12 col-lg-8 offset-lg-1">
+
+      <input className="form-control fs-3" type="email" name="email" id="email" 
+                required   onChange={handleChange}     value={formData.email}
+                pattern="^\w+([\.\-]?\w+)*@\w+([\.\-]?\w+)*(\.\w{2,4})+$"
+                />
+
+      <div className="invalid-feedback">You should enter a valid email!</div>
+  </div>
+</div>
+
+39. It works much better, but we'd like use even more form functionality and 
+
+for this we'll need to cancel the HTML <form> functionality and use something of
+
+Bootstrup. It'll happen later ... 
+
+40. Install react router:
+
+$ npm i react-router-dom
+
+41. We need to envelope by it the whole application
+
+index.js:
+
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './assets/icons/projectIcons';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import './index.css';
+import { BrowserRouter } from 'react-router-dom';
+import App from './App';
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </React.StrictMode>
+);
+
+42. Add Routing to App:
+
+Import 👍
+import { useState } from 'react';
+import { v4 as uuid } from 'uuid';
+import { Routes, Route } from 'react-router-dom';
+
+43. App: add Routes:
+
+return (
+    <UserContext.Provider value={{removeUser}}>
+    <div className="App container pb-5">
+      <div className="appTitle">Bulls and Cows</div>
+      <div className="row gx-0 gy-3">
+        {/* Envelopes only the part that participates in the routing */}
+        <Routes>
+
+          <Route path="/" element={<UserList users={users}>
+                                    <Header title='User List' /> 
+                                  </UserList>} />
+        {/* MISSION: add Route with the link /add-user for AddUser page: */}
+
+          <Route path="/add-user" element={<AddUser add={addUser}>
+                                            <Header title='Add User' /> 
+                                          </AddUser>} />
+                                          
+        </Routes>
+      </div>
+    </div>
+    </UserContext.Provider>
+  );
+
+44. Let's create one more route and for this we need one more page.
+
+src/games/bulls-and-cows/Bulls-and-Cows.scss
+src/games/bulls-and-cows/Bulls-and-Cows.jsx:
+
+import './BullsAndCows.scss';
+import Header from '../../components/header/Header';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+export default function BullsAndCows() {
+
+  const show = [];
+  for (let i=0; i<100; i++) show.push(<FontAwesomeIcon icon="fa-solid fa-cow"/>); 
+   
+  return (
+    <div>
+        <Header title="Bulls and Cows Game" />
+        <h1>THE GAME</h1>
+        <div>
+            { show }
+        </div>
+    </div>
+  )
+}
+
+45. We import it into App.jsx:
+
+import { useState } from 'react';
+import { v4 as uuid } from 'uuid';
+import { Routes, Route } from 'react-router-dom';
+
+import AddUser from './components/addUser/AddUser';
+import BullsAndCows from './games/bulls-and-cows/BullsAndCows';
+import Header from './components/header/Header';
+
+46. And in App.jsx we add one more route:
+
+<Routes>
+
+  <Route path="/" element={<UserList users={users}>
+                            <Header title='User List' /> 
+                          </UserList>} />
+{/* MISSION: add Route with the link /add-user for AddUser page: */}
+
+  <Route path="/add-user" element={<AddUser add={addUser}>
+                                    <Header title='Add User' /> 
+                                  </AddUser>} />
+                                  
+  <Route path="/bulls-and-cows" element={<BullsAndCows />} />
+
+</Routes>
+
+47. We've got the routes, now we need the links. Create the Navbar:
+
+src/components/navbar/Navbar.scss
+src/components/navbar/Navbar.jsx:
+
+import './Navbar.scss';
+
+export default function Navbar() {
+  return (
+    <nav className="navbar navbar-expand-lg bg-main fs-3">
+     <div className="container-fluid">
+      <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <span className="navbar-toggler-icon"></span>
+      </button>
+
+      <a href="#" className="navbar-brand">
+        {/* <img src="./shopping-cart-red-wheels.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top"> */}
+        Bulls and Cows
+      </a>
+       <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
+       <ul className="navbar-nav me-auto mb-2 mb-lg-0 navbar-nav-scroll" style={{"--bs-scroll-height": "100px"}}>
+           <li className="nav-item">
+            <a href="#" className="nav-link active" aria-current="page">Home</a>
+          </li>
+          <li className="nav-item">
+            <a href="#" className="nav-link" href="#">Add User</a>
+          </li>
+          <li className="nav-item">
+            <a href="#" className="nav-link">Bulls and Cows Game</a>
+          </li>
+        </ul>
+        <form className="d-flex" role="search">
+          <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+          <button className="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div> 
+  </nav>
+  )
+}
+
+48. We import Link of REACT-ROUTER and replace <a href="#"> by it in Navbar:
+
+import './Navbar.scss';
+import { Link } from 'react-router-dom';
+
+export default function Navbar() {
+  return (
+    <nav className="navbar navbar-expand-lg bg-main fs-3">
+     <div className="container-fluid">
+      <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <span className="navbar-toggler-icon"></span>
+      </button>
+
+      <Link to="/" className="navbar-brand">
+        {/* <img src="./shopping-cart-red-wheels.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top"> */}
+        Bulls and Cows
+      </Link>
+       <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
+       <ul className="navbar-nav me-auto mb-2 mb-lg-0 navbar-nav-scroll" style={{"--bs-scroll-height": "100px"}}>
+           <li className="nav-item">
+            <Link to="/" className="nav-link active" aria-current="page">Home</Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/add-user" className="nav-link" href="#">Add User</Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/bulls-and-cows" className="nav-link">Bulls and Cows Game</Link>
+          </li>
+        </ul>
+        <form className="d-flex" role="search">
+          <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+          <button className="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div> 
+  </nav>
+  )
+}
+
+49. Router works, Navbar works, but everything now is on a different page,
+
+let's make redirection after the form creates new user. AddUser:
+
+import './AddUser.scss';
+import {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
+
+export default function AddUser({children, add}) {
+
+  const [formData,setFormData] = useState({});
+  const navigate = useNavigate();
+
+  const handleChange = e => setFormData({...formData,
+                                   [e.target.name]: e.target.value});
+
+  function onSubmit(e) {
+
+    e.preventDefault();
+
+      add(formData);
+      setFormData({});
+      navigate('/');
+
+  }
+
+50. As AddUser now is a whole page, let's remove the left border:
+
+return (
+      <div className="col-12 col-sm-6 col-md-5 col-lg-5 offset-lg-1 px-5 addUser order-0 order-sm-1">
+          
+        {children}
+
+51. Also, let's put it in the middle (no need for the order-0 either):
+
+    return (
+      <div className="col-12 col-md-10 col-lg-8 offset-md-1 offset-lg-2 px-5 addUser">
+          
+52. The form is not a totally controlled input as there is no initial values
+
+We'd like to create such a form in general, but meanwhile we'll just
+
+add the initial values hardcoded in AddUser:
+
+export default function AddUser({children, add}) {
+
+  const [formData,setFormData] = useState({fullName:'',email:'',
+                                           nick:'',phone:'',
+                                           gender:'',role:''});
+  const navigate = useNavigate();
+
+  const handleChange = e => setFormData({...formData,
+                                   [e.target.name]: e.target.value});
+
+  function onSubmit(e) {
+
+    e.preventDefault();
+
+    /* if (e.target.checkValidity()) { */
+
+      add(formData);
+      setFormData({fullName:'',email:'',
+                    nick:'',phone:'',
+                    gender:'',role:''});
+      navigate('/');
+
+    /* } */
+
+  }
+
+OK, we've stopped to get messages about that the input is uncontrolled.
+
+53. Header. Inverse the cow colors. And change some colors,
+
+and add the class .header:
+
+import './Header.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+function Header({title}) {
+  return (
+    <h1 className="display-1 text-center header">
+        <FontAwesomeIcon icon="fa-solid fa-cow"
+          className="text-warning"  />
+        {' '+title+' '}
+        <FontAwesomeIcon icon="fa-solid fa-cow"
+             className="fa-inverse fa-flip-horizontal" />
+    </h1>
+  )
+}
+
+export default Header
+
+54. Now we could use the router even for our convenience 
+
+and to study useEffect, for example, so we add UseEffect component
+
+in App.jsx to the imports:
+
+
+......
+
+import UserList from './components/userList/UserList';
+
+import UseEffect from './learn/UseEffect';
+
+import UserContext from './contexts/userContext';
+
+................................................................
+
+and add a Route for it too:
+
+                                          
+          <Route path="/bulls-and-cows" element={<BullsAndCows />} />
+          
+          <Route path="/use-effect" element={<UseEffect />} />
+
+        </Routes>
+
+Also we add it to the Navbar.jsx:
+
+          <li className="nav-item">
+            <Link to="/bulls-and-cows" className="nav-link">Bulls and Cows Game</Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/use-effect" className="nav-link">useEffect</Link>
+          </li>
+        </ul>
+
+55. In UserList.jsx we now also will use the REACT ROUTER - for the button
+
+that should get us to the page where we add a user.
+
+So we import Link:
+
+import './UserList.scss';
+import UserCard from '../userCard/UserCard';
+import { Link } from 'react-router-dom';
+
+...................................................................................
+
+And use it at the button below the component:
+
+        </ul>
+        
+        <button 
+           className="btn btn-outline-info p-0 col-12 col-sm-6 col-md-5 col-lg-6 order-0 order-sm-0 fs-5 align-self-center p-5">
+            <Link to="/add-user">Add User</Link>
+        </button>
+    </div>
+  )
+}
+
+56. UserList. We fix a little bit the width too - as it is now the page with the
+
+list and the button:
+
+  return (
+    // col-12 - 12 columns for the narowest screen (xs - extra small)
+    // col-sm-6 - starting from the small screen - take the half of bootstrap
+    <div className="col-12 row">
+        {children}
+        <ul className="p-0 col-12 col-sm-6 col-md-7 col-lg-6 order-1 order-sm-0">
+{/* MISSION: create expression that if there are some users,
+creates "map" of <UserCard user={user} /> for each user,
+and if not, shows 
+<p className="display-5">This is a sociopatic game: no users</p>
+*/}
+            {users.length > 0 ?
+                users.map(user => 
+                    <UserCard key={user.id} user={user} />):
+                    <p className="display-5">
+                        This is a sociopatic game: no users</p>
+            }
+
+        </ul>
+        
+        <button 
+           className="btn btn-outline-info p-0 col-12 col-sm-6 col-md-5 col-lg-6 order-0 order-sm-0 fs-5 align-self-center p-5">
+            <Link to="/add-user">Add User</Link>
+        </button>
+    </div>
+  )
+
+57. In UserList.jsx. Now we're going to use useEffect - and this is one of the big reasons,
+
+why we need it - to set the dependency of useEffect on MOUNT - THE FIRST RENDER
+
+of the component and to get the external data while the component is going up.
+
+We'd like to get some random pictures from an external API - to put the
+
+pictures for the users that did not write their gender.
+
+So, we import useEffect:
+
+import './UserList.scss';
+import UserCard from '../userCard/UserCard';
+import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+
+58. Also we create there in AddUser.jsx variables that we'll need to
+
+get and set the pictures:
+
+export default function UserList({users, children}) {
+  const [ randUserPics, setRandUserPics ] = useState([]);
+
+  let picUrl = 'https://randomuser.me/api/?results=10&inc=gender,name,picture';
+
+The URL here - is the GET Request for the API of randomuser.me 
+
+59. In useEffect to get 10 random pictures we'll use "fetch()"
+
+function in a form of a PROMISE.
+
+import './UserList.scss';
+import UserCard from '../userCard/UserCard';
+import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+
+export default function UserList({users, children}) {
+  const [ randUserPics, setRandUserPics ] = useState([]);
+
+  let picUrl = 'https://randomuser.me/api/?results=10&inc=gender,name,picture';
+  // Promise: or is pending or is resolved - success (then) or is an error (catch)
+  useEffect(() => {
+    fetch(picUrl)
+      .then(response => response.json())
+      .then(response => {
+        console.log(response);
+        setRandUserPics(response.results.map(el => el.picture.large))
+      })
+      .catch(err => {console.log(err)})
+
+  },[])
+
+60. We also create function after this: for the case that we've got the pictures,
+
+the function knows to choose one randomly:
+
+const getRandPic = () => randUserPics.length > 0 ?
+                                randUserPics[Math.floor(Math.random()*randUserPics.length)] : '';
+
+  console.log(`randUserPics: \n`, randUserPics)
+  
+  return (
+
+61. We should pass the random picture (of course when the component 
+
+just has mounted, there are no pictures yet, so we send '' as a prop,
+
+but in a second the fetch will succeed and set the state,
+
+thus re-render will be caused and now we pass a picture address as a prop).
+
+  return (
+    // col-12 - 12 columns for the narowest screen (xs - extra small)
+    // col-sm-6 - starting from the small screen - take the half of bootstrap
+    <div className="col-12 row">
+        {children}
+        <ul className="p-0 col-12 col-sm-6 col-md-7 col-lg-6 order-1 order-sm-0">
+{/* MISSION: create expression that if there are some users,
+creates "map" of <UserCard user={user} /> for each user,
+and if not, shows 
+<p className="display-5">This is a sociopatic game: no users</p>
+*/}
+            {users.length > 0 ?
+                users.map(user => 
+                    <UserCard key={user.id} user={user} pic={getRandPic()} />):
+                    <p className="display-5">
+                        This is a sociopatic game: no users</p>
+            }
+
+        </ul>
+        
+        <button 
+           className="btn btn-outline-info p-0 col-12 col-sm-6 col-md-5 col-lg-6 order-0 order-sm-0 fs-5 align-self-center p-5">
+            <Link to="/add-user">Add User</Link>
+        </button>
+    </div>
+  )
+
+62. Now let's get the pic from the side of UserCard:
+
+We just get the prop and also change the ternary operator to use the pic,
+
+if it is not '' yet and if the user has not written his gender:
+
+export default function UserCard({user, pic}) {
+
+    const { fullName, email, role, id } = user;
+    const { removeUser } = useContext(UserContext);
+
+  let imgSrc = !user.gender && pic ? pic : !user.gender ? justUserImg : user.gender === 'f' 
+                            ? femaleImg : maleImg;
+
+63. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+80. Bring logo images into src/assets/logo dir
+
+81. Get more icons in src/assets/icons/projectIcons.js:
+
+import {faTrashCan} from '@fortawesome/free-regular-svg-icons';
+import {faCog, faCow, faFileSignature, faSignInAlt, faSignOutAlt, faSlidersH} from '@fortawesome/free-solid-svg-icons';
+/* import { faCoffee, faTrashCan as faSolidTrashCan } 
+                 from '@fortawesome/free-solid-svg-icons'; */
+/* import { faReact } from '@fortawesome/free-brands-svg-icons'; */
+// import { fas } from '@fortawesome/free-solid-svg-icons';
+// import { far } from '@fortawesome/free-regular-svg-icons';
+// import { fab } from '@fortawesome/free-brands-svg-icons';
+import { library} from '@fortawesome/fontawesome-svg-core';
+//import '@fortawesome/fontawesome-free';
+// library.add(far,fas,fab)
+
+library.add(faCog, faCow, faFileSignature, faSignInAlt, faSignOutAlt, faSlidersH, faTrashCan);
+
+/**
+ * 
+ * 
+ * <FontAwesomeIcon icon="fa-regular fa-trash-can" 
+                  className="text-danger" role='button' />
+                <FontAwesomeIcon icon="fa-solid fa-mug-saucer" />
+                <span className="fa-solid fa-mug-saucer"></span>
+                 Icon name: 
+                <FontAwesomeIcon icon="trash-can" />
+                 <FontAwesomeIcon icon={faTrashCan} 
+                  className="text-danger" role='button' />
+                <FontAwesomeIcon icon={faCoffee} 
+                  className="text-warning" role='button' />
+                <FontAwesomeIcon icon={faSolidTrashCan} 
+                  className="text-info" role='button' />
+                <FontAwesomeIcon icon={faReact} 
+                  className="text-success" role='button' /> 
+ */
+
+82. Prepare Navbar.css (SASS):
+
+.navbar {
+
+    .navbar-brand {
+        position: relative;
+        border: 5px solid var(--bs-info);
+        min-width: 9rem;
+        padding: 0;
+
+        .logo {
+            min-height: 6rem;
+        }
+
+        .logoText {
+            position: absolute;
+            top: 0;
+            left: 1px;
+        }
+
+
+    }
+
+    .nav-link {
+        font-size: calc(1.1rem + .6vw) !important;
+        padding: 0 1rem !important;
+        box-shadow: 1px 1px 1px 1px var(--bs-info),inset -1px -1px 2px 2px grey;
+
+        &:hover {
+            box-shadow: 1px 1px 2px 2px var(--bs-info),inset -1px -1px 2px 2px grey;
+        }
+    }
+
+    .profile-menu {
+
+        .profile-pic{
+            display: inline-block;
+            vertical-align: middle;
+             width: 50px;
+             height: 50px;
+             overflow: hidden;
+            border-radius: 50%;
+            
+            img{
+                width: 100%;
+                height: auto;
+                object-fit: cover;
+            }
+         }
+         
+         .dropdown-menu {
+           right: 0;
+           left: unset;
+         }
+
+         .fa-fw {
+           margin-right: 10px;
+         }
+         
+         .toggle-change::after {
+           border-top: 0;
+           border-bottom: 0.3em solid;
+         }
+    }
+
+
+}
+
+83. Now fix Navbar.jsx:
+
+
+
+
+
+
+
+54. Now we could use scss a little bit (scss is just one of the
+
+two formats of SASS). Header.scss:
+
+.header {
+
+    color: var(--bs-cyan);
+
+    [data-icon="cow"] {
+        
+        --fa-inverse: green;
+        filter:drop-shadow(3px 3px 1px white);
+    }
+
+}
+
+55. 
+

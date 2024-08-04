@@ -1,0 +1,44 @@
+3. Create choose-a-user React app. See HW_useContext_example.png
+   
+   a) Get App-choose-a-user.jsx
+   b) You may distribute the components into different files or leave them in the same file
+   c) Convert userName of App to state
+   d) Create Context and add userName and users to the Context
+   e) At UserInfo get userName and users from the Context and show the info about the user
+   f) Create in App function that changes the userName and add it to the context
+   g) Get the above function from the Context at SelectUser and use it onChange 
+      to change the current user and it's info
+   h) Make each entry in users object be object too and use more details for
+      each user, for example
+        const users = {
+                  Aquaman: {name: "Arthur Curry", face: "🐬"},
+                  Batman: {name: "Bruce Wayne", face: "🦇"},
+                  Spiderman: {name: "Peter Parker", face: "🕸"},
+                  Superman: {name: "Clark Kent", face: "🦸‍♂️"},
+                  Wonderwoman: {name: "Princess Diana of Themyscira", face: "👸"}
+               }
+   i) Make SelectUser component not hard-coded but get from the context 
+      "users" and build it
+
+11. Number 3. from the previous Homework - updated: 
+Create choose-a-user-updated React app. 
+See HW_useContext_example2.png
+   
+   a) Get App-choose-a-user-updated.jsx
+   b) You may distribute the components into different files or leave them in the same file
+   c) Convert userName of App to state
+   d) Create Context and add userName and users to the Context
+   e) At UserInfo get userName and users from the Context and show the info about the user
+   f) Create in App function changeUser(newName) that changes the userName and add it to the context
+   g) Make SelectUser component not hard-coded but get from the context 
+      "users" and build it
+   h) Get the function changeUser from the Context at SelectUser and use it onChange 
+      to change the current user and it's info
+   i) In the About component get userName and "users" from the context,
+      use current user favorite color for the background instead of 'yellow',
+      use current user favorite book instead of "Diary of a Wimpy Kid",
+      create the list of the current user's hobbies in the <ul> instead of all the "knitting"
+   j) In the UserInfo component get userName and "users" from the context,
+      use there current user's nick and name (in the brackets),
+      pass the right props to the Emoji component
+

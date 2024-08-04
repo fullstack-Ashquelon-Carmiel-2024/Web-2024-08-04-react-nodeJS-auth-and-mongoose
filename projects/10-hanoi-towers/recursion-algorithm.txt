@@ -1,0 +1,20 @@
+step1: 1 disk - 1 action - start from moving to the 3rd tower 
+     exiting condition
+
+step2: 2 disks - 3 actions - start from moving to the 2nd tower
+
+step3: 3 disks - 7 actions - start from moving to the 3rd tower
+
+        move 2 disks to the 2nd tower - step2
+        move the largest disk to the 3rd tower - step1
+        move 2 disks to the 3rd tower - step2
+
+step4: 4 disks - 15 actions - start from moving to the 2nd tower
+ (from=0, help=1, to=2)
+
+
+        move 3 disks to the 2nd tower - step3 (from=0, help=2, to=1)
+        move the largest disk to the 3rd tower - step1 (from=0, help=1, to=2)
+        move 3 disks to the 3rd tower - step3 (from=1, help=0, to=2)
+
+NUMBER OF STEPS: previous number of steps * 2 + 1

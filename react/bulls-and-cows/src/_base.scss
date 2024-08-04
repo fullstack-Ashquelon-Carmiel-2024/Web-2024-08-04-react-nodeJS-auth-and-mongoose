@@ -1,0 +1,8 @@
+$basic-text-shadow: 1px -1px 0 #fe6161, -3px -3px 2px black, 2px 1px 3px rgba(193, 94, 221, 0.43);
+$basic-button-padding: 1.5rem;
+
+@mixin big-text-shadow ($main-color: black) {
+
+    text-shadow: 1px -1px 0 #fe6161, -3px -3px 2px $main-color, 2px 1px 3px rgba(193, 94, 221, 0.43);
+    border: 5px solid cyan !important;
+}

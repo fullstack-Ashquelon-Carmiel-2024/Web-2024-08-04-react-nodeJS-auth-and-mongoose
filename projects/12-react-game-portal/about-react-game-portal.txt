@@ -1,0 +1,25 @@
+- list of users, that is kept in localStorage
+- 3 types of users: admin - able to see and to change everything
+                   player - able to see his own details and change them and to play
+                    guest - no profile, see or may be play in some minimal games
+- games minimum: 2 games refactored from we've already done + 1 new,
+                 or 3 games refactored
+- technologies: router, using external APIs(started at 14.07.2024
+  + we continue with the examples on 17.07.2024), 
+  (redux? - if not, it will be in the next project), 
+  Material UI icons, Bootstrap - possible, but not obligatory,
+  Sass
+- Pages: SignIn, LogIn, UserDetails, UsersAdminView, 
+  GamesAdminView(may be inside UsersAdminView), games
+
+  The List of the Games that We've Already Done:
+     - Binary Guessing, Nim, Memory, Hanoi Towers, Math Training, Tic-Tac-Toe,
+       String Games, Trivia
+
+  The List of the Possible New Games:
+     - Breakout (or other game with Canvas), Dreidel, 
+       Dice Games (for example, Pig game), endless-dangers,
+       Set game(tbd - get link for it), Whack-a-Mole, Battleship,
+       Conway Life Game, Snakes and Ladders, Bottles and Colors sorting
+
+   Or any other games

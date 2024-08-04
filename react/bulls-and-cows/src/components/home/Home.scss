@@ -1,0 +1,13 @@
+@use '../../_base.scss';
+
+.home {
+
+    button {
+
+        a {
+            text-shadow: base.$basic-text-shadow;
+        }
+
+        padding: base.$basic-button-padding;
+    }
+}

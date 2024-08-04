@@ -1,0 +1,73 @@
+Requirements:
+
+- Class of Stock
+- Class of Avatar
+- Object of Stock of Client Avatars
+- Object of Stock of Shopping Cart Avatars
+
+- Class of Stock of Products extends class of Stock
+יורש קלאס של המחסן
+
+- Class of Poducts (may be extends class of Avatars)
+
+- Class of Client (may be also class of Shopping Cart)
+
+
+
+
+Functionality:
+- Show Stock of Client Avatars (should shuffle them before showing,
+                                should color them randomly)
+- Show Stock of Shopping Cart Avatars (should shuffle them before showing,
+                                       should color them randomly)
+- Show Product Stock. Product that is "on sale" should show "sale",
+  and product that has 4-5 stars should show stars.
+
+- Enable the User to choose Client Avatar and Shopping Cart Avatar
+  and a name and create Client Object and put it into the stock
+  of the clients
+- Be able to choose a client from the stock
+- Enable the User to fill the Cart with Products
+
+
+Optional Recursive part:
+
+- Open all the levels of the bought sets and put them on the "shelves"
+at home like: 5 bottles of red wine, 10 green apples, 3 martini glasses
+(with the pictures)
+
+function orderPurchasedItems(ar) {
+    // if ar - is one layer array of the item objects - just put these objects
+                                                        // on the shelves
+
+    // if ar contains array inside, we will use orderPurchasedItems again
+}
+
+
+- If not doing recursion, just put the "set"s on the "shelves",
+like 2 small red sets, 3 medium green combination
+
+
+Elements for example
+-------------------
+
+Icon of Client or Cart Avatar:
+<i class="fa-solid fa-bag-shopping p-2" style="order: 0; color: rgb(5, 112, 142);"></i>
+
+Product Figure:
+<figure class="fa-solid fa-sack-dollar p-2 card" style="order: 2; color: green;"><div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div><i class="card-img-top fa-solid fa-sack-dollar"></i>
+    <div class="card-body p-4">
+        <div class="text-center">
+            <h5 class="fw-bolder">small set</h5>
+            <div class="d-flex justify-content-center small text-warning mb-2">
+                <div class="fa-solid fa-star"></div><div class="fa-solid fa-star"></div><div class="fa-solid fa-star"></div><div class="fa-solid fa-star"></div>
+            </div>
+            <span class="text-muted text-decoration-line-through">$20.00</span>
+            14.99sheq
+        </div>
+    </div>
+    
+    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+    </div>
+</figure>
